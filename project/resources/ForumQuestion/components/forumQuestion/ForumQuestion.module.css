@@ -1,0 +1,130 @@
+.container {
+  align-self: stretch;
+  margin: auto 0;
+}
+.forumQuestion {
+  display: flex;
+  max-width: 926px;
+  flex-direction: column;
+  font-family: Roboto Mono, sans-serif;
+  font-weight: 400;
+}
+.questionCard {
+  border-radius: 5px;
+  background-color: rgba(217, 217, 217, 1);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  padding: 9px 34px 21px 12px;
+  border: 1px solid rgba(217, 217, 217, 1);
+}
+@media (max-width: 991px) {
+  .questionCard {
+    max-width: 100%;
+    padding-right: 20px;
+  }
+}
+.header {
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+}
+.userInfo {
+  display: flex;
+  gap: 4px;
+  font-size: 14px;
+  color: rgba(20, 70, 113, 1);
+}
+.userAvatar {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 17px;
+  fill: #1bbcb6;
+  align-self: start;
+}
+.postMetadata {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  flex-basis: auto;
+  flex-grow: 1;
+}
+.questionTitle {
+  color: rgba(20, 70, 113, 1);
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 5px;
+}
+@media (max-width: 991px) {
+  .questionTitle {
+    max-width: 100%;
+  }
+}
+.tagContainer {
+  display: flex;
+  margin-top: 4px;
+  align-items: center;
+  gap: 5px;
+  color: rgba(20, 70, 113, 1);
+  justify-content: center;
+  flex-wrap: wrap;
+  font: 700 14px Inter, sans-serif;
+}
+.questionContent {
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 1);
+  align-self: stretch;
+  margin-top: 19px;
+  font-size: 15px;
+  color: rgba(20, 70, 113, 1);
+  padding: 8px 7px;
+}
+@media (max-width: 991px) {
+  .questionContent {
+    max-width: 100%;
+    padding-right: 20px;
+  }
+}
+.actionBar {
+  display: flex;
+  margin-top: 19px;
+  height: 14px;
+  align-items: center;
+  gap: 5px;
+  color: rgba(20, 70, 113, 1);
+  white-space: nowrap;
+  justify-content: start;
+  font: 15px Inter, sans-serif;
+}
+@media (max-width: 991px) {
+  .actionBar {
+    white-space: initial;
+  }
+}
+.actionIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 22px;
+  align-self: stretch;
+  margin: auto 0;
+}
+.actionText {
+  align-self: stretch;
+  margin: auto 0;
+}
+.actionGroup {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 500;
+  justify-content: start;
+  margin: auto 0;
+}
+@media (max-width: 991px) {
+  .actionGroup {
+    white-space: initial;
+  }
+}

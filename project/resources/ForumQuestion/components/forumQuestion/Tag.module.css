@@ -1,0 +1,41 @@
+.tag {
+  border-radius: 60px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto 0;
+  padding: 1px 0;
+}
+.tagContent {
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 4px 5px;
+}
+.statusTag {
+  border-radius: 60px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: Roboto Mono, sans-serif;
+  color: rgba(255, 255, 255, 1);
+  justify-content: center;
+  width: 142px;
+  margin: auto 0;
+  padding: 3px 0;
+}
+.statusContent {
+  border-radius: 20px;
+  background-color: rgba(218, 105, 1, 1);
+  display: flex;
+  gap: 4px;
+  padding: 2px 12px;
+}
+.statusIcon {
+  aspect-ratio: 1;
+  object-fit: contain;
+  object-position: center;
+  width: 15px;
+  align-self: start;
+}
