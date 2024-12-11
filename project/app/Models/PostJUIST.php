@@ -40,4 +40,5 @@ class Post extends Model
     public function notification(){
         return $this->hasMany(Notification::class);
     }
+
 }

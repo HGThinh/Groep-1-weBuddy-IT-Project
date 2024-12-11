@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Report extends Model
 {
+
     protected $table = 'reports';
 
     protected $primaryKey = 'report_id';
@@ -31,4 +32,5 @@ class Report extends Model
     public function post(){
         return $this->belongsTo(Post::class);
     }
+
 }
