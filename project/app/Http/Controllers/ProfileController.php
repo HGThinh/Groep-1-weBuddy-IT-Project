@@ -16,10 +16,10 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): Response
-    {
-        return Inertia::render('Profile/Edit', [
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
+    public function edit(Request $request): Response // Request: object om toegang te krijgen tot alle info over het HTTP-verzoek 
+    { 
+        return Inertia::render('Profile/Edit', [ //component, hetzelfde als return view('Profile/Edit') maar dan React ipv Blade
+            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail, //data die wordt meegegeven aan de component/view
             'status' => session('status'),
         ]);
     }
@@ -27,11 +27,11 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(ProfileUpdateRequest $request): RedirectResponse // ProfileUpdateRequest: request object die de validatie regels bevat
     {
-        $request->user()->fill($request->validated());
+        $request->user()->fill($request->validated()); //fill: vult de attributen van de gebruiker met de (door profileupdatrequest) gevalideerde data 
 
-        if ($request->user()->isDirty('email')) {
+        if ($request->user()->isDirty('email')) { //isDirty: checkt of de waarde van email is veranderd
             $request->user()->email_verified_at = null;
         }
 
