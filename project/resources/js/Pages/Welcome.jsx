@@ -1,5 +1,6 @@
 import { Head, Link } from '@inertiajs/react';
 
+
 export default function Welcome({ auth, laravelVersion, phpVersion }) { //route 
     const handleImageError = () => {
         document
@@ -14,6 +15,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) { //route
 
     return (
         <>
+        <QuestionForm/>
             <Head title="Welcome" />
             <div>
                 <div>

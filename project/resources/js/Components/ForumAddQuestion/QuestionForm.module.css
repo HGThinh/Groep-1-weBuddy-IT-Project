@@ -1,0 +1,290 @@
+.container {
+  border-radius: 15px;
+  background-color: rgba(237, 237, 237, 1);
+  display: flex;
+  width: 45%; /* Set the container width to 85% of the screen width */
+  max-width: 100%; /* Ensure it doesn't overflow */
+  flex-direction: column;
+  align-items: start;
+  padding: 20px 59px;
+  margin: 0 auto; /* Center the container */
+}
+
+@media (max-width: 991px) {
+  .container {
+    width: 90%; /* For smaller screens, make the container width 90% of the screen */
+    padding: 0 20px;
+  }
+}
+
+
+.heading {
+  color: rgba(20, 70, 113, 1);
+  font: 400 50px Jersey 15, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .heading {
+    font-size: 40px;
+  }
+}
+
+.titleLabel {
+  color: rgba(20, 70, 113, 1);
+  margin-top: 14px;
+  font: 700 20px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .titleLabel {
+    margin-left: 7px;
+  }
+}
+
+.titleInput {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  margin-top: 4px;
+  width: 368px;
+  max-width: 100%;
+  height: 24px;
+}
+
+@media (max-width: 991px) {
+  .titleInput {
+    margin-left: 6px;
+  }
+}
+
+.tagsLabel {
+  color: rgba(20, 70, 113, 1);
+  margin: 14px 0 0 10px;
+  font: 700 20px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.tagsContainer {
+  display: flex;
+  width: 566px;
+  max-width: 100%;
+  align-items: start;
+  gap: 10px;
+  color: rgba(20, 70, 113, 1);
+  flex-wrap: wrap;
+  margin: 7px 0 0 11px;
+  font: 400 17px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.tagItem {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  gap: 40px 55px;
+  white-space: nowrap;
+  padding: 2px 6px;
+}
+
+@media (max-width: 991px) {
+  .tagItem {
+    white-space: initial;
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 23px;
+  margin: auto 0;
+}
+
+.icon {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.addButton {
+  position: relative;
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  margin-left: 20px;
+  appearance: none;
+  background-color: black;
+  color: white;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  padding: 15px 25px;
+}
+
+@media (max-width: 991px) {
+  .addButton {
+    display: none;
+  }
+}
+
+.addTagButton {
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  padding: -6px 7px 0;
+  cursor: pointer;
+}
+
+.bodySection {
+  display: flex;
+  gap: 17px;
+  white-space: nowrap;
+  margin: 22px 0 0 13px;
+}
+
+@media (max-width: 991px) {
+  .bodySection {
+    margin-left: 10px;
+    white-space: initial;
+  }
+}
+
+.bodyLabel {
+  color: rgba(20, 70, 113, 1);
+  font: 700 20px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.insertButton {
+  border-radius: 5px;
+  background-color: rgba(131, 131, 131, 1);
+  color: rgba(255, 255, 255, 1);
+  padding: 4px 14px;
+  font: 600 15px Inter, sans-serif;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .insertButton {
+    white-space: initial;
+  }
+}
+
+.bodyInput {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 1);
+  display: flex;
+  width: 676px;
+  max-width: 100%;
+  height: 131px;
+  margin: 9px 0 0 12px;
+}
+
+.anonymousSection {
+  display: flex;
+  gap: 10px;
+  color: rgba(20, 70, 113, 1);
+  margin: 33px 0 0 12px;
+  font: 400 15px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .anonymousSection {
+    margin-left: 10px;
+  }
+}
+
+.checkbox {
+  background-color: rgba(217, 217, 217, 1);
+  align-self: start;
+  display: flex;
+  margin-top: 5px;
+  width: 15px;
+  height: 15px;
+  border: 1px solid rgba(20, 70, 113, 1);
+}
+
+.submitButton {
+  border-radius: 5px;
+  background-color: rgba(20, 70, 113, 1);
+  align-self: end;
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 1);
+  white-space: nowrap;
+  text-align: center;
+  padding: 0 27px 17px;
+  font: 700 20px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+  cursor: pointer;
+}
+
+@media (max-width: 991px) {
+  .submitButton {
+    white-space: initial;
+    padding: 0 20px;
+  }
+}
+
+.plusIcon {
+  font-size: 25px;
+}
+
+.addText {
+  font-style: italic;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Ensure consistent box-sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.dropdown,
+.textInput {
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 1);
+  width: 100%;
+  max-width: 368px; /* Same as dropdown max-width */
+  height: 36px; /* Same height as the dropdown */
+  padding: 5px 10px;
+  font: 400 15px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+  line-height: 1.5; /* Ensure consistent line height */
+}
+
+/* Additional fixes to make dropdown and input look identical */
+.dropdown {
+  -webkit-appearance: none;  /* Remove default dropdown styling */
+  -moz-appearance: none;     /* Remove default dropdown styling */
+  appearance: none;          /* Remove default dropdown styling */
+}
+
+.textInput {
+  display: block; /* Ensures proper alignment */
+  text-align: left; /* Ensure the text aligns properly */
+}
+
+/* For tagItem styling */
+.tagItem {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  color: rgba(20, 70, 113, 1);
+  font: 400 17px Roboto Mono, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .tagItem {
+    margin-left: 7px;
+  }
+}
