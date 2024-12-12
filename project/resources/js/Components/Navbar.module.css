@@ -13,7 +13,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100px;
+    height: 50px;
 }
 
 .navbar img {
@@ -39,19 +39,19 @@ body {
     font-family: 'jersey-m54', sans-serif;
     color: white;
     text-decoration: none;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
 }
 
 .navbar ul li a img {
-    height: 3rem;
+    height: 2rem;
 }
 
 /* Courses Section */
 .coursesContainer {
     display: flex;
     align-items: center;
-    margin: 2rem 0;
+   
     position: relative;
     background-color: white;
 }
@@ -82,8 +82,8 @@ body {
     display: flex;
     align-items: center;
     padding: 0;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
     margin: 0;
     list-style-type: none;
