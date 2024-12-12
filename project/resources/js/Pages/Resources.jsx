@@ -1,7 +1,7 @@
-import { Head, Link, route } from "@inertiajs/react";
 import Navbar from "@/Components/Navbar";
 import ResourceCard from "@/Components/ResourceCard";
 import Foote from "@/Components/Foote";
+
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -25,6 +25,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         "Network essentials",
     ];
 
+    //data of the resources (title, description, type, tags)
     const resourcesData = [
         {
             title: 'Summary - Chapter 4',
@@ -49,7 +50,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Navbar items={courses} />
-            <ResourceCard tags={resourcesData} />
+            <div className="resource-cards-container"></div>
             <Foote />
         </>
     );
