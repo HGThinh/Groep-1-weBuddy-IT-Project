@@ -1,0 +1,41 @@
+.footerstyle{
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    width: 100%;
+    background-color: #091928;
+    color: white;
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+     align-items: center;
+}
+
+.footerstyle li img{
+    width: 14rem;
+}
+.footerstyle li  ul {
+   
+    list-style-type: none;
+}
+
+.footerstyle li h3  {
+    text-align: center;
+    margin: 0;
+    font-family: 'jersey-m54', sans-serif;
+}
+.footerstyle li ul li a{
+    font-family: 'jersey-m54', sans-serif;
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+.footerstyle li ul li {
+    align-items: center;
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+}
+a:hover{
+    opacity: 80%;
+}
