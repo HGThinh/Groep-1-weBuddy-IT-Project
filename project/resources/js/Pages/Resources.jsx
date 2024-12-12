@@ -1,6 +1,5 @@
 import React from 'react';
 import ResourceComponent from '../components/ResourceComponent';
-import styles from '../styles/Resources.module.css';
 
 const resourcesData = [
   {

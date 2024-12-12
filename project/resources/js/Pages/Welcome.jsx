@@ -1,6 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
+import ResourceComponent from '@/Components/ResourceComponent';
+import React from 'react';
 
-export default function Welcome({ auth, laravelVersion, phpVersion }) { //route 
+export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
         document
             .getElementById('screenshot-container')
@@ -12,48 +14,64 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) { //route
         document.getElementById('background')?.classList.add('!hidden');
     };
 
-    return (
-        <>
-        
-            <Head title="Welcome" />
-            <div>
+    const resourcesData = [
+        {
+            title: 'Summary - Chapter 4',
+            description: 'This is a summary of Chapter 4, covering subnetting and basic network concepts.',
+            type: 'Summary',
+            tags: ['Network Essentials', 'Subnetting', 'Dutch'],
+        },
+        {
+            title: 'Study Planning - All Chapters',
+            description: 'A complete study plan to prepare for the exams effectively.',
+            type: 'Guide',
+            tags: ['Study Tips', 'Planning', 'Exams'],
+        },
+        {
+            title: 'Notes - Windows Chapters 1 & 2',
+            description: 'Detailed notes covering commands and shortcuts for Windows OS.',
+            type: 'Notes',
+            tags: ['Windows', 'Commands', 'Shortcuts', 'OS'],
+        },
+    ];
+
+    const ResourcePage = () => {
+        return (
+            <>
+                <ResourceComponent tags={resourcesData} />
+                <Head title="Welcome" />
                 <div>
                     <div>
-                        <header>
-                            <nav>
-                                {auth.user ? ( //ternary operator
-                                    <Link
-                                        href={route('dashboard')}
-                                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                                    >
-                                        Dashboard
-                                    </Link>
-                                ) : (
-                                    <>
+                        <div>
+                            <header>
+                                <nav>
+                                    {auth.user ? (
                                         <Link
-                                            href={route('login')}
+                                            href={route('dashboard')}
+                                            className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
                                         >
-                                            Log in
+                                            Dashboard
                                         </Link>
-                                        <Link
-                                            href={route('register')}
-                                        >
-                                            Register
-                                        </Link>
-                                    </>
-                                )}
-                            </nav>
-                        </header>
+                                    ) : (
+                                        <>
+                                            <Link href={route('login')}>Log in</Link>
+                                            <Link href={route('register')}>Register</Link>
+                                        </>
+                                    )}
+                                </nav>
+                            </header>
 
-                        <main>                           
-                        </main>
+                            <main></main>
 
-                        <footer>
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
-                        </footer>
+                            <footer>
+                                Laravel v{laravelVersion} (PHP v{phpVersion})
+                            </footer>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </>
-    );
+            </>
+        );
+    };
+
+    return <ResourcePage />;
 }
