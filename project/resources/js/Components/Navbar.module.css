@@ -7,7 +7,7 @@ body {
 }
 
 .navbar {
-    
+
     margin: 0;
     padding: 2rem;
     display: flex;
@@ -93,7 +93,7 @@ body {
     margin-left: 3rem;
     margin-right: 3rem;
     font-weight: bold;
-   
+
     font-size: 1.5rem;
     font-family: 'jersey-m54', sans-serif;
     text-align: center;

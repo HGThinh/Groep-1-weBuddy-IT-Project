@@ -1,14 +1,12 @@
-.footerstyle{
+.footerstyle {
     padding-top: 4rem;
     padding-bottom: 4rem;
-    width: 100%;
-    background-color: #091928;
     color: white;
     display: flex;
     justify-content: center;
     list-style-type: none;
     margin: 0;
-     align-items: center;
+    align-items: center;
 }
 
 .footerstyle li img{

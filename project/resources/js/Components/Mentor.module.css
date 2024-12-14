@@ -1,0 +1,63 @@
+
+.Mentor {
+    display: flex;
+    font-family: 'jersey-m54', sans-serif;
+    height: 120px;
+    color: white;
+    background-color: #197380;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 3rem;
+    border-radius: 30px;
+    gap: 2rem;
+ 
+}
+.Mentor img {
+    background-color: #1BBCB6;
+    border-radius: 100px;
+    height: 100%;
+    
+   
+}
+.Mentor .containerImg{
+    aspect-ratio: 1 / 1;
+    height: 100%;
+}
+.Mentor h2 {
+font-size: 2rem;
+  margin: 0;
+   
+}
+.Mentor .tags{
+    font-weight: bold;
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    
+}
+.Mentor .tags li{ 
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    background-color: rgb(255, 255, 255);
+    color: rgb(53, 59, 110);
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+
+
+    border-radius: 10px;
+ }
+ .Mentor .tags li.role{ 
+   
+    background-color: #1BBCB6;
+    color: rgb(255, 255, 255);
+   
+ }
+ .Mentor p{ 
+   
+    font-size: 1.5rem;
+   
+ }
+
+
