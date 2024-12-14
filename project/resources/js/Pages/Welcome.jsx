@@ -16,11 +16,15 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const courses = [
         "Programming Essentials",
         "Advanced React",
-        "Web Development Basics",
-        "efwfeefwefwefwefw",
-        "effweefwefwefw",
-        "fwefewefwefwefwfew",
-        "efwfewfewefwfe",
+        "Web Essentials",
+        "Data Essentials",
+        "Web advanced",
+        "Software Design Essentials",
+        "Network Essentials",
+        "Security Essentials",
+        "Italent",
+        "Programming Essentials 2",
+        "Desktop OS",
     ];
 
     return (
