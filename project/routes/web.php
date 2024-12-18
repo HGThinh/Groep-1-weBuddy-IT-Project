@@ -12,6 +12,18 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+
+use Illuminate\Support\Facades\Mail;
+
+Route::get('/test-email', function () {
+    Mail::raw('This is a test email.', function ($message) {
+        $message->to('test@example.com')
+            ->subject('Test Email');
+    });
+
+    return 'Email sent and logged successfully!';
+});
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -25,13 +37,34 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+use Illuminate\Http\Request;
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::middleware(['auth', 'verified'])->group(function () {
     //Profile route
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
     //Home route
-    Route::get('/home', [HomeController::class, 'get'])->name('home.get'); // Retrieve home
+    Route::get('/home', [HomeController::class, 'getHome'])->name('home.get'); // Retrieve home
 
     //Course route
     Route::get('/course/{id}', [HomeController::class, 'get'])->name('course.get'); // Retrieve course by id
@@ -86,5 +119,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::delete('/admin/posts/{id}', [AdminController::class, 'deletePost']); // Delete post
     Route::delete('/admin/comments/{id}', [AdminController::class, 'deleteComment']); // Delete comment
 });
+
+
 
 require __DIR__ . '/auth.php';
