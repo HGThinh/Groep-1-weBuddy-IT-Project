@@ -11,19 +11,19 @@ const Foote = () => {
             <li>
                 <ul>
                     <li>
-                        <a href="#home">Forum</a>
+                        <a href={route('forum.get')}>Forum</a>
                     </li>
 
                     <li>
-                        <a href="#about">Resources</a>
+                        <a href={route('resources.get')}>Resources</a>
                     </li>
 
                     <li>
-                        <a href="#contact">Mentors</a>
+                        <a href={route('mentor.get')}>Mentors</a>
                     </li>
 
                     <li>
-                        <a href="#contact">Profile</a>
+                        <a href={route('profile.edit')}>Profile</a>
                     </li>
                 </ul>
             </li>
