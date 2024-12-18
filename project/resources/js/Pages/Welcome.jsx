@@ -1,5 +1,7 @@
 import { Head, Link } from "@inertiajs/react";
 import Navbar from "@/Components/Navbar";
+import Foote from "@/Components/Foote";
+import Question from "@/Components/QuestionForum";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     //route
@@ -26,11 +28,42 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         "Programming Essentials 2",
         "Desktop OS",
     ];
+    const questions = [
+        {
+            Name: "Mariana Z",
+            ProfilePicture: "/path/to/image.png",
+            TimePosted: "35 minutes",
+            Catgeory: "Programming Essentials",
+            QuestionTitle: "How to use React Hooks effectively?",
+            BoolAnswered: true,
+            tags: ["React", "Hooks", "JavaScript"],
+            Question:
+                "I'm struggling with understanding useState and useEffect. Can someone explain?",
+            upvotes: 45,
+            Answer: "Hooks allow you to manage state and side effects in functional components. Start with basic examples.",
+        },
+        {
+            Name: "John D",
+            ProfilePicture: "/path/to/another-image.png",
+            TimePosted: "2 hours",
+            Catgeory: "Advanced React",
+            QuestionTitle:
+                "What is the difference between Context API and Redux?",
+            BoolAnswered: false,
+            tags: ["React", "State Management", "Redux"],
+            Question:
+                "I know both can handle state, but which is better for complex apps?",
+            upvotes: 30,
+            Answer: null,
+        },
+        // Add more questions if needed
+    ];
 
     return (
         <>
             <Navbar items={courses} />
             <Head title="Welcome" />
+            <Question data={questions} />
             <div>
                 <div>
                     <div>
@@ -64,6 +97,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     </div>
                 </div>
             </div>
+            <Foote></Foote>
         </>
     );
 }
