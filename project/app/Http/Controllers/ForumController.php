@@ -12,7 +12,7 @@ class ForumController extends Controller
     {
 
 
-        return Inertia::render('Forum', []);
+        return Inertia::render('ForumPage', []);
     }
 
     // Retrieve a single forum post by ID
