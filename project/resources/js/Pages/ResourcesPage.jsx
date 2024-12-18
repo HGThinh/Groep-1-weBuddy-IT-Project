@@ -2,7 +2,6 @@ import Navbar from "@/Components/Navbar";
 import ResourceCard from "@/Components/ResourceCard";
 import Foote from "@/Components/Foote";
 
-
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
         document
@@ -28,28 +27,32 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     //data of the resources (title, description, type, tags)
     const resourcesData = [
         {
-            title: 'Summary - Chapter 4',
-            description: 'This is a summary of Chapter 4, covering subnetting and basic network concepts.',
-            type: 'Summary',
-            tags: ['Network Essentials', 'Subnetting', 'Dutch'],
+            title: "Summary - Chapter 4",
+            description:
+                "This is a summary of Chapter 4, covering subnetting and basic network concepts.",
+            type: "Summary",
+            tags: ["Network Essentials", "Subnetting", "Dutch"],
         },
         {
-            title: 'Study Planning - All Chapters',
-            description: 'A complete study plan to prepare for the exams effectively.',
-            type: 'Guide',
-            tags: ['Study Tips', 'Planning', 'Exams'],
+            title: "Study Planning - All Chapters",
+            description:
+                "A complete study plan to prepare for the exams effectively.",
+            type: "Guide",
+            tags: ["Study Tips", "Planning", "Exams"],
         },
         {
-            title: 'Notes - Windows Chapters 1 & 2',
-            description: 'Detailed notes covering commands and shortcuts for Windows OS.',
-            type: 'Notes',
-            tags: ['Windows', 'Commands', 'Shortcuts', 'OS'],
+            title: "Notes - Windows Chapters 1 & 2",
+            description:
+                "Detailed notes covering commands and shortcuts for Windows OS.",
+            type: "Notes",
+            tags: ["Windows", "Commands", "Shortcuts", "OS"],
         },
     ];
 
     return (
         <>
             <Navbar items={courses} />
+            <h1>This is page Resources</h1>
             <div className="resource-cards-container"></div>
             <Foote />
         </>
