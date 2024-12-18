@@ -6,7 +6,7 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
-    public function getAboutus()
+    public function getHome()
     {
 
 
