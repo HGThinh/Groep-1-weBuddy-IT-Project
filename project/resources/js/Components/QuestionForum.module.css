@@ -1,0 +1,88 @@
+.Question {
+    display: flex;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px 0;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.containerImg {
+    flex-shrink: 0;
+    margin-right: 16px;
+}
+
+.containerImg img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #ddd;
+}
+
+h2 {
+    font-size: 14px;
+    color: #555;
+    margin: 0 0 8px;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 16px;
+    color: #333;
+    margin: 8px 0;
+    font-weight: 700;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 8px;
+    gap: 8px;
+}
+
+.role {
+    background-color: #ffb545;
+    color: white;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.tag {
+    background-color: #e4e6eb;
+    color: #333;
+    border-radius: 12px;
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+    margin: 4px 0;
+}
+
+p:last-of-type {
+    margin-top: 8px;
+    font-style: italic;
+    color: #777;
+}
+
+p:not(:last-of-type) {
+    font-weight: 500;
+}
+
+.Question p:nth-of-type(3) {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.Question p:nth-of-type(4) {
+    color: #dc3545;
+}
