@@ -20,16 +20,16 @@ const Navbar = ({ items }) => {
                 <img src="/Images/weBuddy.png" alt="WeBuddy Logo" />
                 <ul>
                     <li>
-                        <a href="#Forum">Forum</a>
+                        <a href={route('forum.get')}>Forum</a>
                     </li>
                     <li>
-                        <a href="#Resources">Resources</a>
+                        <a href={route('resources.get')}>Resources</a>
                     </li>
                     <li>
-                        <a href="#Mentors">Mentors</a>
+                        <a href={route('mentor.get')}>Mentors</a>
                     </li>
                     <li>
-                        <a className={styles.icon} href="#profile">
+                        <a className={styles.icon} href={route('profile.edit')}>
                             <img
                                 src="/Images/iconprofile.png"
                                 alt="Profile Icon"
