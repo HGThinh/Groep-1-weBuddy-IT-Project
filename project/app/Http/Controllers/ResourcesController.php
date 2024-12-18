@@ -13,7 +13,7 @@ class ResourcesController extends Controller
 
 
         // Render the Inertia page and pass data
-        return Inertia::render('Resources', []);
+        return Inertia::render('ResourcesPage', []);
     }
 
     // Retrieve a single resource by ID
