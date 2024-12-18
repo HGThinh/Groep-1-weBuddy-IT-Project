@@ -12,7 +12,7 @@ class MentorController extends Controller
     {
 
         // Render mentor list page
-        return Inertia::render('Mentor', []);
+        return Inertia::render('MentorPage', []);
     }
 
     // Retrieve mentor general information
