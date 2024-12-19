@@ -1,8 +1,8 @@
 import React from "react";
-import styles from "./Mentor.module.css";
+import styles from "./QuestionForum.module.css";
 
-// example mentor infor; Name: Mariana Z, ProfilePicture: image.png, TimePosted: 35 minutes, Catgeory: Prog essentaiols, Description
-const Mentor = ({
+// Question component
+const Question = ({
     Name,
     ProfilePicture,
     TimePosted,
@@ -12,19 +12,29 @@ const Mentor = ({
     tags,
     Question,
     upvotes,
-    Answer,
+    comments,
 }) => {
     return (
         <div className={styles.Question}>
-            <div className={styles.containerImg}>
-                <img src={ProfilePicture} alt={`${Name}'s profile`} />
-            </div>
             <div>
-                <h2>
-                    {Name} | {TimePosted} points
-                </h2>
+                <div className={styles.containernameimage}>
+                    <div className={styles.containerImg}>
+                        <img
+                            src={ProfilePicture}
+                            alt={`${Name}'s profile`}
+                            onError={(e) =>
+                                (e.target.src = "Images/UserProfileNoPic.png")
+                            } // Fallback image
+                        />
+                    </div>
+                    <h2>
+                        {Name} | Posted {TimePosted} ago in <a>{Catgeory}</a>
+                    </h2>
+                </div>
                 <ul className={styles.tags}>
-                    <li className={styles.role}>{Catgeory}</li>
+                    <li className={styles.Anwsered}>
+                        {BoolAnswered ? "Answered" : "Not Answered"}
+                    </li>
                     {tags.map((tag, index) => (
                         <li className={styles.tag} key={index}>
                             {tag}
@@ -32,13 +42,34 @@ const Mentor = ({
                     ))}
                 </ul>
                 <h3>{QuestionTitle}</h3>
-                <p>{Question}</p>
-                <p>{upvotes} upvotes</p>
-                <p>{BoolAnswered ? "Answered" : "Not Answered"}</p>
-                <p>{Answer}</p>
+                <p className={styles.textbox}>{Question}</p>
+                <p className={styles.footerQuestion}>
+                    <a href="">
+                        <img src="Images/arrow-circle-up.svg" alt="" />{" "}
+                        {upvotes}{" "}
+                    </a>
+                    <a href="">
+                        <img src="Images/message-circle.svg" alt="" />
+                        {comments}
+                    </a>
+                    <a href="">
+                        <img src="Images/flag-1.svg" alt="" /> Report
+                    </a>
+                </p>
             </div>
         </div>
     );
 };
 
-export default Mentor;
+// QuestionForum component
+const QuestionForum = ({ data }) => {
+    return (
+        <div className={styles.QuestionForum}>
+            {data.map((question, index) => (
+                <Question key={index} {...question} />
+            ))}
+        </div>
+    );
+};
+
+export default QuestionForum;
