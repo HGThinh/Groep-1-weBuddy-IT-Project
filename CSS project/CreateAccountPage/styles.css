@@ -1,0 +1,133 @@
+:root {
+    --primary-color: linear-gradient(
+        to bottom,
+        #144671 33%,
+        #0E2F4C 67%,
+        #0B243A 83%,
+        #091928 100%
+    );
+    --secondary-color: #1bbcb6;
+    --text-color: #144671;
+    --white: #fff;
+    --shadow: rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.5;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color); /* Apply the gradient background here */
+}
+
+.container {
+    background: var(--white); /* White background for the form container */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px var(--shadow);
+    width: 100%;
+    max-width: 400px;
+}
+
+form h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--secondary-color);
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: darken(var(--secondary-color), 10%);
+}
+
+input:invalid {
+    border-color: #dc3545;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.login-link {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-top: 10px;
+    color: var(--text-color);
+}
+
+.login-link a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 991px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+    }
+
+    form h2 {
+        font-size: 1.5rem;
+    }
+}
