@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mentor;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -12,7 +13,10 @@ class MentorController extends Controller
     {
 
         // Render mentor list page
-        return Inertia::render('MentorPage', []);
+        //return Inertia::render('MentorPage', []);
+        $mentors = Mentor::all();
+        return response()->json($mentors);
+        return Inertia::render('TestMentor', []);
     }
 
     // Retrieve mentor general information
