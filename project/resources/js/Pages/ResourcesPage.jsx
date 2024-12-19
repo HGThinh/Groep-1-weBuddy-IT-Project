@@ -52,7 +52,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     return (
         <>
             <Navbar items={courses} />
+            
             <h1>This is page Resources</h1>
+            <ResourceCard items={resourcesData} />
             <div className="resource-cards-container"></div>
             <Foote />
         </>
