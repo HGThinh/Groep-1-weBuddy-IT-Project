@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to your school account">
+    <title>Login - weBuddy</title>
+    <link rel="stylesheet" href="Login.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <main class="login-container">
+        <div class="login-wrapper">
+            <div class="login-content">
+                <div class="login-form-column">
+                    <form id="loginForm" class="login-form-wrapper" novalidate>
+                        <h1 class="login-heading">LOGIN TO YOUR ACCOUNT</h1>
+                        <p class="login-subheading">using your school account</p>
+                        <a href="../CreateAccountPage/index.html" >
+                            <button type="button" class="login-button">Create Account</button>
+                          </a>
+                        <div class="login-divider" role="presentation"></div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="visually-hidden">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                class="input-field" 
+                                placeholder="Email" 
+                                required 
+                                aria-required="true"
+                                autocomplete="email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="password-wrapper">
+                                <label for="password" class="visually-hidden">Password</label>
+                                <input 
+                                    type="password" 
+                                    id="password" 
+                                    class="input-field" 
+                                    placeholder="Password" 
+                                    required 
+                                    aria-required="true"
+                                    autocomplete="current-password">
+                                <button 
+                                    type="button" 
+                                    id="togglePassword" 
+                                    class="toggle-password" 
+                                    aria-label="Show password">
+                                    <img 
+                                        src="../assets/eye-icon.svg" 
+                                        alt="" 
+                                        width="24" 
+                                        height="24">
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="login-button">Login</button>
+                    </form>
+                </div>
+                
+                <div class="brand-column">
+                    <div class="brand-name">
+                        <span>we</span>
+                        <span class="brand-highlight">B</span>
+                        <span>uddy</span>
+                    </div>
+                    <p class="brand-slogan">BECAUSE TEAMWORK MAKES THE DREAM WORK</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="Login.js"></script>
+</body>
+</html>

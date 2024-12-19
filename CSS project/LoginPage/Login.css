@@ -1,0 +1,234 @@
+:root {
+    --primary-color: linear-gradient(
+        to bottom,
+        #144671 33%,
+        #0E2F4C 67%,
+        #0B243A 83%,
+        #091928 100%
+    );
+    --secondary-color: #1bbcb6;
+    --text-color: #144671;
+    --white: #fff;
+    --shadow: rgba(0, 0, 0, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent unwanted scrolling */
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    line-height: 1.5;
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure full height */
+    width: 100%; /* Ensure full width */
+}
+
+.login-wrapper {
+    flex-grow: 1; /* Allow it to expand and fill the available space */
+    width: 100%;
+    background: var(--primary-color); /* Gradient background */
+}
+
+.login-content {
+    flex-grow: 1; /* Take up remaining space dynamically */
+    display: flex;
+    gap: 20px;
+}
+
+.login-form-column {
+    flex: 0 0 60%; /* Take up the remaining 60% */
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-form-wrapper {
+    color: var(--white);
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.login-heading {
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 4.375rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.login-subheading {
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-divider {
+    height: 3px;
+    background-color: var(--white);
+    margin: 2rem 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.input-field {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 25px;
+    border: none;
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.input-field:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--secondary-color);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.login-button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 2rem auto 0;
+}
+
+
+.brand-column {
+    flex: 0 0 40%; /* Take up 40% of the width */
+    background-color: var(--secondary-color);
+    padding: 4rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.brand-name {
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 4rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+
+.brand-highlight {
+    color: var(--text-color);
+}
+
+.brand-slogan {
+    font-size: 4rem;
+    color: var(--white);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+[aria-invalid="true"] {
+    border: 2px solid #dc3545;
+}
+
+@media (max-width: 991px) {
+    .login-content {
+        flex-direction: column;
+        height: 100%; /* Ensure full height on smaller screens */
+    }
+
+    .login-form-column,
+    .brand-column {
+        width: 100%;
+        flex: 1; /* Split space evenly */
+    }
+
+    .login-heading,
+    .brand-name,
+    .brand-slogan {
+        font-size: 2.5rem;
+    }
+
+    .login-form-wrapper {
+        padding: 1rem;
+    }
+}
+/* Add these styles for the <a> tag */
+a {
+    text-decoration: none; /* Remove underline */
+}
+
+a:focus,
+a:active {
+    outline: none; /* Prevent outline from showing when clicked */
+    text-decoration: none; /* Ensure no underline on focus or active */
+}
+
+/* Ensure button styles are applied to <a> */
+a.login-button {
+    background-color: var(--secondary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 25px;
+    padding: 1rem 4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 2rem auto 0;
+}
+
+/* Hover effect for <a> */
+
+
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
