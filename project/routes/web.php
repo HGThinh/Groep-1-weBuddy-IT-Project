@@ -8,21 +8,14 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\PointsController;
 use App\Http\Controllers\ResourcesController;
+use App\Http\Controllers\TestEmailController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-
-use Illuminate\Support\Facades\Mail;
-
-Route::get('/test-email', function () {
-    Mail::raw('This is a test email.', function ($message) {
-        $message->to('test@example.com')
-            ->subject('Test Email');
-    });
-
-    return 'Email sent and logged successfully!';
-});
+Route::get('/test-email', [TestEmailController::class, 'sendVerificationEmail']);
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -41,16 +34,11 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
 
     return redirect('/home');
 })->middleware(['auth', 'signed'])->name('verification.verify');
-
-
-use Illuminate\Http\Request;
 
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
@@ -59,67 +47,58 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    //Profile route
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Profile route
+    Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile.get');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile/edit', [ProfileController::class, 'update'])->name('profile.update');
 
-    //Home route
-    Route::get('/home', [HomeController::class, 'getHome'])->name('home.get'); // Retrieve home
+    // Home route
+    Route::get('/home', [HomeController::class, 'getHome'])->name('home.get');
 
-    //Course route
-    Route::get('/course/{id}', [HomeController::class, 'get'])->name('course.get'); // Retrieve course by id
+    // Course route
+    Route::get('/course/{id}', [HomeController::class, 'get'])->name('course.get');
 
-    //Mentor route
-    Route::get('/mentor', [MentorController::class, 'getMentor'])->name('mentor.get'); // Retrieve mentor
-    Route::get('/mentor/info', [MentorController::class, 'getInfo'])->name('mentor.info.get'); // Retrieve mentor
-    Route::get('/mentor/profile/{id}', [MentorController::class, 'getMentorProfile'])->name('mentor.profile.get'); // Retrieve mentor by id
-    Route::post('/mentor/request', [MentorController::class, 'sendRequest'])->name('mentor.request.post'); // Send new mentorship request
-    Route::post('/mentor/application', [MentorController::class, 'sendApplication'])->name('mentor.application.post');; // Send mentorship application
+    // Mentor route
+    Route::get('/mentor', [MentorController::class, 'getMentor'])->name('mentor.get');
+    Route::get('/mentor/info', [MentorController::class, 'getInfo'])->name('mentor.info.get');
+    Route::get('/mentor/profile/{id}', [MentorController::class, 'getMentorProfile'])->name('mentor.profile.get');
+    Route::post('/mentor/request', [MentorController::class, 'sendRequest'])->name('mentor.request.post');
+    Route::post('/mentor/application', [MentorController::class, 'sendApplication'])->name('mentor.application.post');
 
-    //Forum route
-    Route::get('/forum', [ForumController::class, 'getForum'])->name('forum.get'); // Retrieve forum
-    Route::get('/forum/post/{id}', [ForumController::class, 'getPost'])->name('forum.post.get'); // Retrieve forum by id
-    Route::post('/forum/ask', [ForumController::class, 'sendQuestion'])->name('forum.ask.post');; // Ask new question
-    Route::post('/report', [ForumController::class, 'sendReport'])->name('report.post');; // Send report this post
-    Route::put('/forum/post/{id}', [ForumController::class, 'updatePost'])->name('forum.post.update'); // Update post
-    Route::delete('/forum/post/{id}', [ForumController::class, 'deletePost'])->name('forum.post.delete'); // Delete post
+    // Forum route
+    Route::get('/forum', [ForumController::class, 'getForum'])->name('forum.get');
+    Route::get('/forum/post/{id}', [ForumController::class, 'getPost'])->name('forum.post.get');
+    Route::post('/forum/ask', [ForumController::class, 'sendQuestion'])->name('forum.ask.post');
+    Route::post('/report', [ForumController::class, 'sendReport'])->name('report.post');
+    Route::put('/forum/post/{id}', [ForumController::class, 'updatePost'])->name('forum.post.update');
+    Route::delete('/forum/post/{id}', [ForumController::class, 'deletePost'])->name('forum.post.delete');
 
-    //Resources route
-    Route::get('/resources', [ResourcesController::class, 'getResources'])->name('resources.get'); // Retrieve resources
-    Route::get('/resources/post/{id}', [ResourcesController::class, 'getResourcesPost'])->name('resources.post.get'); // Retrieve resources by id
-    Route::post('/resources/add', [ResourcesController::class, 'sendResources'])->name('resources.post.post');; // Ask new question
-    Route::put('/resources/post/{id}', [ResourcesController::class, 'updateResourcesPost'])->name('resources.post.update'); // Update post
-    Route::delete('/resources/post/{id}', [ResourcesController::class, 'deleteResources'])->name('resources.post.delete'); // Delete post
+    // Resources route
+    Route::get('/resources', [ResourcesController::class, 'getResources'])->name('resources.get');
+    Route::get('/resources/post/{id}', [ResourcesController::class, 'getResourcesPost'])->name('resources.post.get');
+    Route::post('/resources/add', [ResourcesController::class, 'sendResources'])->name('resources.post.post');
+    Route::put('/resources/post/{id}', [ResourcesController::class, 'updateResourcesPost'])->name('resources.post.update');
+    Route::delete('/resources/post/{id}', [ResourcesController::class, 'deleteResources'])->name('resources.post.delete');
 
-    //Points route
-    Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get'); // Retrieve points
+    // Points route
+    Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get');
 
-    //About us route
-    Route::get('/aboutus', [AboutUsController::class, 'getAboutus'])->name('aboutus.get'); // Retrieve about us
-    Route::post('/aboutus', [AboutUsController::class, 'sendIssue'])->name('aboutus.issue.post');; // Send issue
-
+    // About us route
+    Route::get('/aboutus', [AboutUsController::class, 'getAboutus'])->name('aboutus.get');
+    Route::post('/aboutus', [AboutUsController::class, 'sendIssue'])->name('aboutus.issue.post');
 });
 
 // Admin - GET routes (Requires login and admin access)
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    // Admin - POST routes (Requires login and admin access)
+    Route::get('/admin/users', [AdminController::class, 'getUsers']);
+    Route::get('/admin/reports', [AdminController::class, 'getReports']);
+    Route::get('/admin/posts', [AdminController::class, 'getPosts']);
+    Route::get('/admin/comments', [AdminController::class, 'getComments']);
+    Route::get('/admin/applications', [AdminController::class, 'getApplications']);
 
-
-    Route::get('/admin/users', [AdminController::class, 'getUsers']); // Retrieve user's list
-    Route::get('/admin/reports', [AdminController::class, 'getReports']); // Retrieve reports
-    Route::get('/admin/posts', [AdminController::class, 'getPosts']); // Retrieve posts
-    Route::get('/admin/comments', [AdminController::class, 'getComments']); // Retrieve comments
-    Route::get('/admin/applications', [AdminController::class, 'getApplications']); // Retrieve applications
-
-
-
-
-    // Admin - DELETE routes (Requires login and admin access)
-    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']); // Delete user
-    Route::delete('/admin/posts/{id}', [AdminController::class, 'deletePost']); // Delete post
-    Route::delete('/admin/comments/{id}', [AdminController::class, 'deleteComment']); // Delete comment
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
+    Route::delete('/admin/posts/{id}', [AdminController::class, 'deletePost']);
+    Route::delete('/admin/comments/{id}', [AdminController::class, 'deleteComment']);
 });
-
-
 
 require __DIR__ . '/auth.php';
