@@ -15,8 +15,9 @@ class MentorController extends Controller
         // Render mentor list page
         //return Inertia::render('MentorPage', []);
         $mentors = Mentor::all();
-        return response()->json($mentors);
-        return Inertia::render('TestMentor', []);
+        return Inertia::render('TestMentor', [
+            'mentors' => $mentors,
+        ]);
     }
 
     // Retrieve mentor general information

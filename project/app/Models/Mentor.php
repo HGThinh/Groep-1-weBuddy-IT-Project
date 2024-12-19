@@ -53,6 +53,8 @@ class Mentor extends Model
 {
     use HasFactory;
 
+    protected $table = 'testmentors';
+
     protected $fillable = ['name', 'points', 'role', 'tags', 'description'];
     protected $casts = [
         'tags' => 'array',
