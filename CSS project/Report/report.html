@@ -4,8 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Page</title>
+    <link rel="stylesheet" href="report.css">
 </head>
 <body>
-    
+    <div class="report-page">
+        <div class="header">
+          <a href="#" class="back-button" onclick="redirectToResourceDetails()">←</a>
+          <h1>Report this post</h1>
+        </div>
+        <form id="reportForm" class="report-form">
+          <div class="reason-section">
+            <p>Please select the reason for the report:</p>
+            <div class="reason">
+              <input type="radio" id="hateful" name="reason" value="Hateful content" required>
+              <label for="hateful">Hateful content</label>
+            </div>
+            <div class="reason">
+              <input type="radio" id="inappropriate" name="reason" value="Inappropriate content">
+              <label for="inappropriate">Inappropriate content</label>
+            </div>
+            <div class="reason">
+              <input type="radio" id="spam" name="reason" value="Spam">
+              <label for="spam">Spam</label>
+            </div>
+          </div>
+          <div class="complaint-section">
+            <label for="complaintText">Explain your complaint:</label>
+            <textarea id="complaintText" rows="5" placeholder="Describe the issue here..." required></textarea>
+          </div>
+          <button type="submit" class="send-button">Send</button>
+        </form>
+      </div>
+      <script src="report.js"></script>
 </body>
 </html>

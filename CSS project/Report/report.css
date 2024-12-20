@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1b3b63, #274b7a);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .report-page {
+    background: #2a4a6b;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .back-button {
+    text-decoration: none;
+    color: #1e74c5;
+    font-size: 1rem;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    margin: 0;
+  }
+  
+  .report-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .reason-section {
+    margin-bottom: 20px;
+  }
+  
+  .reason {
+    margin: 10px 0;
+  }
+  
+  .reason input[type="radio"] {
+    margin-right: 10px;
+  }
+  
+  .complaint-section {
+    margin-bottom: 20px;
+  }
+  
+  textarea {
+    margin-top: 10px; /* Adds some spacing between the label and the textarea */
+    width: calc(100% - 20px); /* To fit the container with padding */
+    background: #1b3b63;
+    color: #fff;
+    border: 1px solid #1e74c5;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+    box-sizing: border-box; /*padding is considered in width */
+  }
+  
+  textarea::placeholder {
+    color: #aaa;
+  }
+  
+  .send-button {
+    background: #1e74c5;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+  .send-button:hover {
+    background: #145a94;
+  }
+  
