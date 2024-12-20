@@ -10,6 +10,10 @@ reportForm.addEventListener('submit', (event) => {
 
   alert('Your report has been submitted. Thank you!');
 });
+//add route to resource details page
 function redirectToResourceDetails() {
     window.location.href = "../ResourceDetails/resourcedetails.html";
   }
+  //when user sends report add time to be redirected to the resource details page
+
+  //add a content checker to the description of the complaint
