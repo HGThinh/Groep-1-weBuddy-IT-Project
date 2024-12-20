@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Details</title>
+    <link rel="stylesheet" href="resourcedetails.css">
+</head>
+<body>
+    <div class="resource-details-page">
+        <header>
+            <h1 class="page-title">Resource Details</h1>
+        </header>
+        <main class="resource-details-container">
+            <!-- Resource Card Section top left of the page -->
+            <div class="resource-card-section">
+              <div class="resource-card" style="background-color: #e20001;">
+                <div class="card-icon">
+                  <img src="https://play-lh.googleusercontent.com/IkcyuPcrQlDsv62dwGqteL_0K_Rt2BUTXfV3_vR4VmAGo-WSCfT2FgHdCBUsMw3TPGU" alt="PDF Icon" />
+                </div>
+                <h2 class="card-title">Summary - Chapter 4</h2>
+                <div class="tag-container">
+                  <span class="tag verified">✔ verified post</span>
+                  <span class="tag">network essentials</span>
+                  <span class="tag">dutch</span>
+                  <span class="tag">summary</span>
+                  <span class="tag">subnetting</span>
+                </div>
+              </div>
+            </div>
+      
+            <!-- Keywords and description section -->
+            <div class="keywords-description-section">
+              <div class="keywords">
+                <span class="keyword">Network Essentials</span>
+                <span class="keyword">Subnetting</span>
+                <span class="keyword">Dutch</span>
+              </div>
+              <p class="description">
+                This summary of Chapter 4 helps us understand subnetting and IP addressing much better. 
+                The concepts are explained clearly and made easier to apply. A useful resource for anyone 
+                struggling with this chapter.
+              </p>
+            </div>
+      
+            <!-- Interaction Icons Section: change icons-->
+            <div class="interaction-icons">
+              <a href="#nowhere" target="_blank" class="icon-btn">👍</a>
+              <a href="#nowhere" target="_blank" class="icon-btn">👎</a>
+              <a href="#nowhere" target="_blank" class="icon-btn">🔖</a>
+              <button class="report-btn" id="report-btn" onclick="redirectToReport()">⚠️</button>
+            </div>
+      
+            <!-- Download Section: This should redirect to a pdf or file the user wants to download-->
+            <section class="download-section">
+              <p>You currently have 10 points. Downloading a resource costs 2 points!</p>
+              <button class="download-btn">Download resource</button>
+            </section>
+      
+            <!-- Comment Section: every time a user adds a comment it should post itself -->
+            <section class="comments-section">
+              <div class="comment">
+                <p class="comment-text">
+                  Great summary of Chapter 4! It helped clarify the concepts of subnetting and IP addressing. 
+                  Thank you so much!
+                </p>
+                <small>@Yanick Smith on Dec. 12, 2024</small>
+              </div>
+            </section>
+      
+            <!-- Feedback Section (same thing as comment section) -->
+            <section class="feedback-section">
+              <p>Share your thoughts on this resource! What did you find helpful? Any suggestions for improvement?</p>
+              <textarea placeholder="Write your feedback here..."></textarea>
+              <button class="feedback-btn">Send</button>
+            </section>
+          </main>        
+      
+        <script src="resourcedetails.js"></script>
+</body>
+</html>
