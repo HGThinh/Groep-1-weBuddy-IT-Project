@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>weBuddy Mentor Application</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">weBuddy</div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#">Forum</a></li>
+        <li><a href="#">Resources</a></li>
+        <li><a href="#">Mentors</a></li>
+        <li><a href="#">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Mentor Application -->
+  <main class="application-container">
+    <h1>weBuddy Mentorship Application</h1>
+    <form class="mentor-form" id="mentorForm">
+      <!-- Role Section -->
+      <div class="form-section small-section">
+        <h2>Choose your role:</h2>
+        <label><input type="checkbox" name="role" value="tutor"> Tutor</label>
+        <label><input type="checkbox" name="role" value="ebuddy"> eBuddy</label>
+        <label><input type="checkbox" name="role" value="buddy"> Buddy</label>
+      </div>
+
+      <!-- Courses Section -->
+      <div class="form-section small-section">
+        <h2>Courses</h2>
+        <label><input type="checkbox" name="course" value="programming"> Programming Essentials</label>
+        <label><input type="checkbox" name="course" value="ai-basics"> Web Essentials</label>
+        <label><input type="checkbox" name="course" value="web-dev"> Web Advanced</label>
+        <label><input type="checkbox" name="course" value="databases"> Software Design</label>
+        <label><input type="checkbox" name="course" value="programming"> Programming Essentials 2</label>
+        <label><input type="checkbox" name="course" value="ai-basics"> Network Essentials</label>
+        <label><input type="checkbox" name="course" value="web-dev"> ITalent</label>
+        <label><input type="checkbox" name="course" value="databases"> Data Essentials</label>
+        <label><input type="checkbox" name="course" value="programming"> Programming Project</label>
+        <label><input type="checkbox" name="course" value="databases"> Other:</label>
+        <input type="text" id="otherCourse" name="otherCourse" placeholder="Enter course name">
+      </div>
+
+      <!-- Mode Section -->
+      <div class="form-section small-section">
+        <h2>Type</h2>
+        <label><input type="radio" name="mode" value="online" > Online</label>
+        <label><input type="radio" name="mode" value="hybrid"> Hybrid</label>
+        <label><input type="radio" name="mode" value="in-person"> In-Person</label>
+      </div>
+
+      <!-- Additional Info -->
+      <div class="form-section">
+        <label for="languages">Languages</label>
+        <input type="text" id="languages" name="languages" placeholder="E.g., English, French">
+      </div>
+
+      <div class="form-section">
+        <label for="motivation">Motivation Letter</label>
+        <textarea id="motivation" name="motivation" placeholder="Write your motivation here..." rows="5"></textarea>
+      </div>
+
+      <!-- Upload Section for resume or score sheet -->
+      <div class="form-section">
+        <label for="resume">Grades or Resume</label>
+        <input type="file" id="resume" name="resume" accept=".pdf">
+      </div>
+
+      <button type="submit" class="apply-btn">Apply</button>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p>© 2024 weBuddy | IT Project - Group 1</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>
