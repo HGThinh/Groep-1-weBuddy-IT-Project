@@ -19,7 +19,7 @@ class ForumController extends Controller
     public function getPost($id)
     {
 
-        return Inertia::render('Forum/post', []);
+        return Inertia::render('ForumPage', []);
     }
 
     // Add a new question to the forum
