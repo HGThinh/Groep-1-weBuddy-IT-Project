@@ -1,36 +1,106 @@
-.resource-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    background-color: #ea4545;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 300px;
-  }
-  .resource-title {
-    font-size: 18px;
-    margin-bottom: 8px;
-    color: #333;
-  }
-  .resource-description {
-    font-size: 14px;
-    margin-bottom: 8px;
-    color: #555;
-  }
-  .resource-type {
-    font-size: 14px;
-    margin-bottom: 8px;
-    color: #777;
-  }
-  .resource-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .resource-tag {
-    background-color: #ddd;
-    color: #333;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    }
+.containerResources {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  max-width: 1260px;
+  margin: auto;
+  gap: 20px;
+  padding: 20px;
+
+}
+
+.containerResource {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background-color: #ff0000;
+  width: 300px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+}
+
+.containerResource:hover .resourceCard {
+  opacity: 0.6;
+  ;
+  /* Darker shade on hover */
+}
+
+
+
+.resourceCard {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 25px;
+  font-family: jersey, sans-serif;
+  position: relative;
+  z-index: 1;
+  /* Ensures card content stays above the download icon */
+}
+
+.resourceCard a {
+  text-decoration: none;
+}
+
+.fileTypeIcon {
+  margin-bottom: 10px;
+}
+
+.fileTypeImage {
+  width: 50px;
+  height: 50px;
+  filter: brightness(0) invert(1);
+  /* Ensures the icon is white */
+  margin-bottom: 10px;
+}
+
+.resourceTitle {
+  font-weight: 900;
+  font-size: 18px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.resourceCard h3 {
+  letter-spacing: 2px;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+}
+
+.resourceDescription {
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.resourceType {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 8px;
+  color: #ffffff;
+}
+
+.resourceTags {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.resourceTag {
+  font-weight: bold;
+  background-color: #ffffff81;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
