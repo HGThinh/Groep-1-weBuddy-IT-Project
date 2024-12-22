@@ -26,6 +26,10 @@ Route::get('/', function () {
     ]);
 });
 
+// About us route
+Route::get('/aboutus', [AboutUsController::class, 'getAboutus'])->name('aboutus.get');
+Route::post('/aboutus', [AboutUsController::class, 'sendIssue'])->name('aboutus.issue.post');
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -82,10 +86,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Points route
     Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get');
-
-    // About us route
-    Route::get('/aboutus', [AboutUsController::class, 'getAboutus'])->name('aboutus.get');
-    Route::post('/aboutus', [AboutUsController::class, 'sendIssue'])->name('aboutus.issue.post');
 });
 
 // Admin - GET routes (Requires login and admin access)
