@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #02325a, #00467F);
+    color: #fff;
+    line-height: 1.6;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: #003459;
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .logo span {
+    color: #1bbcb6;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+  }
+  
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .icon {
+    font-size: 1.3rem;
+  }
+  
+  .search-bar {
+    text-align: center;
+    margin: 1.5rem 0;
+  }
+  
+  #searchInput {
+    width: 60%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  #searchButton {
+    padding: 0.7rem 1rem;
+    background: #1bbcb6;
+    border: none;
+    color: #edf3f7;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .section {
+    margin: 2rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .resources-container,
+  .forum-container,
+  .bookmark-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .resource-card {
+    padding: 1rem;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .resource-card a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .red {
+    background-color: #e20001;
+  }
+  
+  .blue {
+    background-color: #00467F;
+  }
+  
+  .green {
+    background-color: #007B3D;
+  }
+  
+  .forum-question {
+    padding: 1rem;
+    background: #003459;
+    border-radius: 8px;
+  }
+  
+  .forum-question a {
+    color: #1bbcb6;
+    text-decoration: none;
+  }
+  
+  .footer {
+    text-align: center;
+    padding: 1rem;
+    background: #00467F;
+  }
+  
+  .footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  
+  .footer a {
+    color: #1bbcb6;
+    text-decoration: none;
+  }
+  

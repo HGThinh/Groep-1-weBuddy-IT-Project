@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>weBuddy - Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- add routes to right pages -->
+  <nav class="navbar">
+    <div class="logo">we<span>Buddy</span></div>
+    <ul class="nav-links">
+      <li><a href="#forum">Forum</a></li>
+      <li><a href="#mentors">Mentors</a></li>
+      <li><a href="../">Resources</a></li>
+      <li><a href="#profile" class="icon">👤</a></li>
+      <li><a href="#points" class="icon">💎</a></li>
+    </ul>
+  </nav>
+
+  <!-- add filtering with keywords-->
+  <section class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search resources, forums, or keywords..." />
+    <button id="searchButton">Search</button>
+  </section>
+
+  <!--add routes -->
+  <section class="section" id="resources">
+    <h2>Resources</h2>
+    <div class="resources-container">
+      <div class="resource-card red">
+        <a href="resource-details.html">
+          <h3>Summary - Chapter 4</h3>
+          <p>Network Essentials, Subnetting</p>
+        </a>
+      </div>
+      <div class="resource-card blue">
+        <a href="resource-details.html">
+          <h3>Notes - Windows 1 & 2</h3>
+          <p>Commands, OS Shortcuts</p>
+        </a>
+      </div>
+      <div class="resource-card green">
+        <a href="resource-details.html">
+          <h3>Study Planning</h3>
+          <p>IT Essentials, Study Tips</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- add routes -->
+  <section class="section" id="forum">
+    <h2>Forum</h2>
+    <div class="forum-container">
+      <div class="forum-question">
+        <a href="#nowhere">
+          <h3>How do I fix my JavaScript for-loop?</h3>
+          <p>@Selma El Mahyaoui - 1 hour ago</p>
+        </a>
+      </div>
+      <div class="forum-question">
+        <a href="#nowhere">
+          <h3>What is the best way to subnet?</h3>
+          <p>@John - 2 hours ago</p>
+        </a>
+      </div>
+      <div class="forum-question">
+        <a href="#nowhere">
+          <h3>How to create a database schema?</h3>
+          <p>@Emma Styles - 3 hours ago</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bookmarks Section -->
+  <section class="section" id="bookmarks">
+    <h2>Bookmarks</h2>
+    <div class="bookmark-container">
+      <div class="resource-card red">
+        <a href="resource-details.html">
+          <h3>Summary - Chapter 4</h3>
+          <p>Network Essentials, Subnetting</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>weBuddy - IT Project - Group 1</p>
+    <ul>
+      <li><a href="#forum">Forum</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#mentors">Mentors</a></li>
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#points">Points</a></li>
+    </ul>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
