@@ -1,0 +1,28 @@
+.searchBar {
+    text-align: center;
+    margin: 1.5rem 0;
+}
+  
+.searchInput {
+    width: 60%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 5px;
+}
+.searchButton {
+    padding: 0.7rem 1rem;
+    background: #00467F;
+    border: none;
+    color: #edf3f7;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.searchButton:hover {
+    background: #003459;
+    border-color: #025497;
+}
+  
+.searchInput:focus {
+    outline: 2px solid #00467F;
+}
