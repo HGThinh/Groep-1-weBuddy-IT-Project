@@ -2,6 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import Navbar from "@/Components/Navbar";
 import Foote from "@/Components/Foote";
 import { useState } from "react";
+import SearchBar from "@/Components/Searchbar";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     //route
@@ -30,7 +31,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Navbar items={courses} />
             <h1>dit is de Home page</h1>
-
+            <SearchBar />
             <Foote />
         </>
     );
