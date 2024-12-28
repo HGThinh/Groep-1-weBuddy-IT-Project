@@ -2,16 +2,13 @@ import React from 'react';
 import '@/Components/PointsPage.module.css';
 import '@/Components/Navbar';
 import '@/Components/Foote';
+import '@/Components/Searchbar'
 
 const pointPage = () => {
   return (
     <>
     <Navbar items={courses} />
-      <section className="search-bar">
-        <input type="text" id="searchInput" placeholder="Search resources, forums, or keywords..." />
-        <button id="searchButton">Search</button>
-      </section>
-
+    <SearchBar />
       <main className="points-section">
         <div className="section-header">
           <img src="" alt="" className="header-icon" />
