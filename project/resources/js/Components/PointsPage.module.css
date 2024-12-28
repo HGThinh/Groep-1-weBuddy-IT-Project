@@ -15,38 +15,6 @@
     text-decoration: none;
   }
   
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem 2rem;
-    background: #003459;
-  }
-  
-  .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
-  
-  .logo span {
-    color: #1bbcb6;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 1.5rem;
-  }
-  
-  .nav-links a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-  }
-  
-  .icon {
-    font-size: 1.3rem;
-  }
-  
   .search-bar {
     text-align: center;
     margin: 1.5rem 0;
@@ -178,21 +146,3 @@
     color: #fff;
     font: 400 20px/1.3 Roboto Mono, sans-serif;
   }
-  .footer {
-    text-align: center;
-    padding: 1rem;
-    background: #00467F;
-  }
-  
-  .footer ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 1.5rem;
-  }
-  
-  .footer a {
-    color: #1bbcb6;
-    text-decoration: none;
-  }
-  
