@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>weBuddy - Home</title>
+  <link rel="stylesheet" href="pointPage.css">
+</head>
+<!--add icons where necessary-->
+<body>
+  <!-- add routes to right pages and replace the icons -->
+  <nav class="navbar">
+    <div class="logo">we<span>Buddy</span></div>
+    <ul class="nav-links">
+      <li><a href="#forum">Forum</a></li>
+      <li><a href="#mentors">Mentors</a></li>
+      <li><a href="../ResourceMain/resources.html">Resources</a></li>
+      <li><a href="#profile" class="icon">👤</a></li>
+      <li><a href="../PointPage/pointPage.html" class="icon">💎</a></li>
+    </ul>
+  </nav>
+
+  <section class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search resources, forums, or keywords..." />
+    <button id="searchButton">Search</button>
+  </section>
+
+  <main class="points-section">
+    <div class="section-header">
+      <img src="" alt="" class="header-icon" />
+      <h2>Your <span class="logo-blue">P</span>oints</h2>
+    </div>
+
+    <!--add scrolling effect for the point history of the user-->
+    <div class="points-card">
+      <div class="points-list">
+        <p>+ 3 Uploading a resource in Programming I Essentials - 23 min ago</p>
+        <p>+ 1 An upvote in Programming Essentials I - 23 min ago</p>
+        <p>+ 2 Responding to a question in Programming Essentials I - 23 min ago</p>
+        
+        <div class="points-total">
+          <span>12</span>
+          <span class="points-text">points</span>
+        </div>
+      </div>
+
+      <div class="scroll-container">
+        <div class="scroll-thumb"></div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <img src="" alt="" class="header-icon" />
+      <h2>Point <span class="logo-blue">S</span>ystem</h2>
+    </div>
+
+    <p class="system-description">
+      At weBuddy, we believe in active contribution over passive consumption. We want to foster a vibrant, collaborative community where everyone is rewarded for their contributions. To kickstart your journey, every user starts with 10 points. Earn points by sharing knowledge and supporting others, and spend them to access valuable resources.
+    </p>
+
+    <div class="points-table">
+      <div class="table-row">
+        <div class="table-cell">
+          <div class="cell-content">
+            <p>Downloading a resource</p>
+            <p>Uploading a resource</p>
+            <p>Responding to a question</p>
+            <p>Receiving an upvote on your comment</p>
+          </div>
+        </div>
+        <div class="table-cell">
+          <div class="cell-content">
+            <p>-3</p>
+            <p>+3</p>
+            <p>+2</p>
+            <p>+1</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="system-description">
+      Plus, to help users know who they can trust, each user's current point total is displayed next to their name. This provides a quick way to identify active, reliable contributors in the community!
+    </p>
+
+  <footer class="footer">
+    <p>weBuddy - IT Project - Group 1</p>
+    <ul>
+      <li><a href="#forum">Forum</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#mentors">Mentors</a></li>
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#points">Points</a></li>
+    </ul>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
