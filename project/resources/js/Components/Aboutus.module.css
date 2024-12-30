@@ -1,226 +1,142 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient( #1e3c72, #4b79c8);
-    color: #fff;
-    overflow-x: hidden;
-  }
+main {
+  margin: 0;
+  background-color: aliceblue;
 
-  h1, h2, h3 {
-    font-weight: 650;
-  }
+  background: radial-gradient(circle at 20% 80%, rgb(209, 235, 230), #5ad1cd 30%, transparent 70%),
+    radial-gradient(circle at 80% 20%, #75b4b2, rgb(196, 220, 226) 30%, transparent 70%),
+    radial-gradient(circle at 0% 0%, #ffffff, rgb(196, 220, 226) 30%, transparent 70%),
+    radial-gradient(circle at 100% 100%, #ffffff, rgb(196, 220, 226) 30%, transparent 70%);
+  ;
+  color: #000000;
+}
 
-  a {
-    text-decoration: none;
-    color: inherit;
-  }
+h1,
+h2,
+h3 {
+  font-family: "Press Start 2P", serif;
 
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    background: rgba(0, 0, 0, 0.7);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-  }
 
-  .navbar .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: rgb(5, 212, 212);
-  }
+}
 
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-  }
+h1 {
+  font-size: 45px;
+}
 
-  .nav-links a {
-    font-size: 1rem;
-    transition: color 0.3s;
-  }
+h2 {
+  font-size: 35px;
+  margin-bottom: 25px;
+}
 
-  .nav-links a:hover {
-    color: #00ffea;
-  }
+h3 {
+  font-size: 25px;
+}
 
-  .hero {
-    height: 70vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background: linear-gradient(#1e3c72, #4b79c8);
-    color: #fff;
-  }
+.hero {
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #000000;
+}
 
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
+.hero div h1 {
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 50px;
 
-  .hero p {
-    font-size: 1.2rem;
-    max-width: 600px;
-  }
+}
 
-  /* Key Features */
-  .key-features {
-    padding: 40px 20px;
-    text-align: center;
-  }
+.hero div p {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 1.2rem;
+  max-width: 600px;
+}
 
-  .key-features h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: rgb(8, 199, 199);
-  }
+/* Key Features */
+.keyFeatures {
+  margin-bottom: 7rem;
+  padding: 40px 20px;
+  text-align: center;
+}
 
-  .features-grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
 
-  .feature {
-    background: linear-gradient(#1e3c72, #4b79c8);
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    width: 300px;
-    transition: transform 0.3s;
-  }
+.featuresGrid {
+  display: flex;
+  gap: 35px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-  .feature:hover {
-    transform: scale(1.05);
-    border-color: #00ffea;
-    box-shadow: 0 15px 30px rgb(162, 249, 249);
+.feature {
+  color: #000000;
+  background-image: linear-gradient(#ffffff38, #ffffff2f);
+  padding: 50px;
+  border-radius: 15px;
+  text-align: center;
+  width: 300px;
+  transition: transform 0.5s;
+}
 
-  }
+.feature:hover {
+  border: 1px solid white;
+  transform: scale(1.05);
+  box-shadow: 0 0px 30px #ffffff59;
 
-  .feature .icon {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-    color: #00ffea;
-  }
 
-  .feature h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
+}
 
-  /* VMV Section */
-  .vmv {
-    padding: 40px 20px;
-  }
+.feature .icon {
+  filter: saturate(3);
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #000000;
+}
 
-  .vmv h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #00d4ff;
-  }
+.feature h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
 
-  .bubble-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+/* VMV Section */
+.vmv {
+  padding: 40px 20px;
+  padding-bottom: 11rem;
 
-  }
+}
 
-  .bubble {
-    background: linear-gradient(#1e3c72, #4b79c8);
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    text-align: center;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
+.vmv h2 {
+  text-align: center;
 
-  .bubble:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 25px 50px rgb(162, 249, 249);
-  }
+}
 
-  .faq {
-    padding: 40px 20px;
-    background: rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
+.bubbleContainer {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
 
-  .faq h2 {
-    margin-bottom: 20px;
-    color: #00d4ff;
-  }
+}
 
-  .faq-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
+.bubble {
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  text-align: center;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-  .faq-list a {
-    color: #fff;
-    font-size: 1rem;
-    transition: color 0.3s;
-  }
-
-  .faq-list a:hover {
-    color: #00d4ff;
-  }
-
-  .footer {
-    text-align: center;
-    padding: 20px;
-    background: #243b55;
-  }
-
-  .footer .footer-links {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-  }
-
-  .footer .footer-links a:hover {
-    color: #00d4ff;
-  }
-
-  .features-grid {
-    display: flex;
-    gap: 20px;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-wrap: wrap;
-  }
-
-  .bubble-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-wrap: wrap;
-  }
-
-  .faq-list {
-    list-style: none; /* Remove list decoration */
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-  }
+.bubble h3 {
+  font-size: 1.5rem;
+}
