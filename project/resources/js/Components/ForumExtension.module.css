@@ -1,0 +1,153 @@
+.ContainerMenor {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 2%;
+
+}
+
+
+/* FilterComponent.module.css */
+.container {
+    width: 20%;
+    border-right: solid 1px #c9c9c9;
+    font-family: 'jersey-m54', sans-serif;
+    color: #1d375e;
+    padding: 16px;
+
+    margin-right: 1rem;
+}
+
+.backButton {
+    background-color: #1bbcb700;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+}
+
+.reply {
+    gap: 1rem;
+    height: 5vw;
+    display: flex;
+    padding: 1rem;
+    background-color: #1BBCB6;
+
+}
+
+.reply input {
+    font-size: 2rem;
+    color: #ffffff;
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid white;
+    background-color: #ffffff00;
+}
+
+.reply ::-webkit-input-placeholder {
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 500;
+}
+
+
+
+.headerSection {
+    color: #1BBCB6;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    margin-bottom: 16px;
+}
+
+.headerSection h2 {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.headerTitle {
+    font-weight: 600;
+
+}
+
+.headerSection span {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: white;
+    font-style: italic;
+}
+
+.filterGroup {
+    background-color: #c9c9c97c;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-bottom: 16px;
+}
+
+.filterTitle {
+    color: white;
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.checkboxLabel,
+.radioLabel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.checkbox,
+.radio {
+    height: 20px;
+    width: 20px;
+    margin-right: 8px;
+}
+
+.labelText {
+    font-size: 14px;
+}
+
+.inputLabel {
+    margin-bottom: 8px;
+}
+
+
+
+.rangeContainer {
+    display: flex;
+    align-items: center;
+}
+
+.rangeLabel {
+    font-size: 14px;
+}
+
+.rangeInput {
+    margin: 0 12px;
+    flex-grow: 1;
+}
+
+.content {
+    margin: auto;
+    width: 80%;
+    background-color: #ffffff41;
+    padding: 0rem;
+}
