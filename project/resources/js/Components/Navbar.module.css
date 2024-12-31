@@ -5,7 +5,9 @@ body {
 
     width: 100%;
     margin: 0;
-    background-image: linear-gradient(#144671, #091928);
+    background: linear-gradient(#144671ab, #09192894), radial-gradient(circle at 20% 80%, rgba(181, 203, 250, 0), #144671 30%, transparent 70%),
+        radial-gradient(circle at 80% 20%, #ffffff38, #144671 30%, transparent 70%);
+
 
     background-size: cover;
     background-repeat: no-repeat;
@@ -14,7 +16,7 @@ body {
 
 
 .navbar {
-
+    background: linear-gradient(#144671ab, #09192834);
     margin: 0;
     padding: 2rem;
     display: flex;

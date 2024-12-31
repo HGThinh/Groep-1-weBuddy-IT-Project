@@ -1,5 +1,6 @@
 .footerstyle {
-    border-top: 20px solid #ffffff;
+    background: linear-gradient(#ffffff00, #0b243a62, #091928);
+    height: 15vw;
     padding-top: 4rem;
     padding-bottom: 4rem;
     color: white;

@@ -56,7 +56,7 @@
 }
 
 .filterGroup {
-    background-color: #c9c9c9;
+    background-color: #c9c9c97c;
     padding: 1rem;
     border-radius: 15px;
     margin-bottom: 16px;
@@ -110,7 +110,7 @@
 
 .content {
     width: 60%;
-    background-color: #ffffff;
+    background-color: #ffffff41;
     padding: 1rem;
     border-radius: 5px;
 }

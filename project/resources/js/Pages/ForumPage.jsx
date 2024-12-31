@@ -2,6 +2,7 @@ import { Head, Link } from "@inertiajs/react";
 import Navbar from "@/Components/Navbar";
 import Question from "@/Components/QuestionForum";
 import styles from "@/Components/Forum.module.css";
+import Foote from "@/Components/Foote";
 
 import { useState } from "react";
 

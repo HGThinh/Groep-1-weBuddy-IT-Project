@@ -7,7 +7,7 @@ const fileTypeColors = {
     xls: "#217346",
     ppt: "#D24726",
     txt: "#808080",
-    default: "#CCCCCC",
+    default: "#ffffff2c",
 };
 
 const fileTypeIcons = {
@@ -15,63 +15,75 @@ const fileTypeIcons = {
     doc: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftword.svg",
     xls: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftexcel.svg",
     ppt: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftpowerpoint.svg",
-    txt: "https://cdn.jsdelivr.net/npm/simple-icons/icons/notepad.svg",
+    txt: "https://uxwing.com/wp-content/themes/uxwing/download/file-and-folder-type/txt-file-icon.png",
     default: "https://cdn.jsdelivr.net/npm/simple-icons/icons/file.svg",
 };
 
 const ResourceCard = ({ items }) => {
     return (
         <>
-            <div className={styles.containerResources}>
-                {items.map((resource, index) => {
-                    const backgroundColor =
-                        fileTypeColors[resource.type.toLowerCase()] ||
-                        fileTypeColors.default;
-                    const fileIcon =
-                        fileTypeIcons[resource.type.toLowerCase()] ||
-                        fileTypeIcons.default;
+            <div className={styles.containerResources2}>
+                <h1>Recources</h1>
+                <div className={styles.containerResources}>
+                    {items.map((resource, index) => {
+                        const backgroundColor =
+                            fileTypeColors[resource.type.toLowerCase()] ||
+                            fileTypeColors.default;
+                        const fileIcon =
+                            fileTypeIcons[resource.type.toLowerCase()] ||
+                            fileTypeIcons.default;
 
-                    return (
-                        <div
-                            key={index}
-                            className={styles.containerResource}
-                            style={{ backgroundColor }}
-                        >
-                            {/* Download Icon */}
-                            <div className={styles.downloadIcon}></div>
-
-                            <div className={styles.resourceCard}>
-                                <a href="">
-                                    {/* Add File Type Icon */}
-                                    <div className={styles.fileTypeIcon}>
-                                        <img
-                                            src={fileIcon}
-                                            alt={`${resource.type} icon`}
-                                            className={styles.fileTypeImage}
-                                        />
-                                    </div>
-                                    <h3>{resource.title}</h3>
-                                    <p className={styles.resourceType}>
-                                        {resource.type}
-                                    </p>
-                                    <div className={styles.resourceTags}>
-                                        {resource.tags.map((tag, index) => (
-                                            <span
-                                                key={index}
-                                                className={styles.resourceTag}
+                        return (
+                            <div
+                                key={index}
+                                className={styles.containerResource}
+                                style={{ backgroundColor }}
+                            >
+                                <a href={resource.link || "#"}>
+                                    <div className={styles.resourceCard}>
+                                        {/* Add File Type Icon */}
+                                        {fileIcon !== fileTypeIcons.default && (
+                                            <div
+                                                className={styles.fileTypeIcon}
                                             >
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                    <p className={styles.resourceDescription}>
-                                        {resource.description}
-                                    </p>
+                                                <img
+                                                    src={fileIcon}
+                                                    alt={`${resource.type} icon`}
+                                                    className={
+                                                        styles.fileTypeImage
+                                                    }
+                                                />
+                                            </div>
+                                        )}
+                                        <h3>{resource.title}</h3>
+                                        <p className={styles.resourceType}>
+                                            {resource.type}
+                                        </p>
+                                        <div className={styles.resourceTags}>
+                                            {resource.tags.map((tag, index) => (
+                                                <span
+                                                    key={index}
+                                                    className={
+                                                        styles.resourceTag
+                                                    }
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                        <p
+                                            className={
+                                                styles.resourceDescription
+                                            }
+                                        >
+                                            {resource.description}
+                                        </p>
+                                    </div>{" "}
                                 </a>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
+                </div>
             </div>
         </>
     );
