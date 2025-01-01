@@ -17,13 +17,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     };
 
     const courses = [
-        "Programming Essentials",
+        "Programming Essentials 1",
         "Advanced React",
         "Web Development Basics",
-        "efwfeefwefwefwefw",
-        "effweefwefwefw",
-        "fwefewefwefwefwfew",
-        "efwfewfewefwfe",
+        "Web essentials",
+        "IT essentials",
+        "Network essentials",
+        "Programming essentials 2",
+        "Data Essentials",
+        "Desktop OS",
+        "Italent 1",
+        "Software Design essentials"
     ];
 
     return (
