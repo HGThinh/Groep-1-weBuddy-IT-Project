@@ -16,21 +16,28 @@ body {
     background: rgba(0, 0, 0, 0.2);
     border-radius: 10px;
   }
+  .sectionTitle {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+  
   
   h2 {
     text-align: center;
     margin-bottom: 1rem;
   }
   
-  .resources-container,
-  .forum-container,
-  .bookmark-container {
+  .resourcesContainer,
+  .forumContainer,
+  .bookmarkContainer {
     display: flex;
     justify-content: center;
     gap: 1rem;
   }
   
-  .resource-card {
+  .resourceCard {
     padding: 1rem;
     border-radius: 8px;
     color: #fff;
@@ -39,7 +46,7 @@ body {
     transition: transform 0.3s, box-shadow 0.3s;
   }
   
-  .resource-card:hover {
+  .resourceCard:hover {
     transform: scale(1.05);
     box-shadow: 0 2px 20px rgb(162, 249, 249);
   }
@@ -61,14 +68,14 @@ body {
     background-color: #007B3D;
   }
   
-  .forum-question {
+  .forumQuestion {
     padding: 1rem;
     background: #003459;
     border-radius: 8px;
     transition: transform 0.3s, box-shadow 0.3s;
   }
   
-  .forum-question:hover {
+  .forumQuestion:hover {
     transform: scale(1.05);
     box-shadow: 0 2px 20px rgb(162, 249, 249);
   }
