@@ -58,12 +58,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const [value, setValue] = useState(0);
 
     const courses = [
-        "Programming Essentials I",
-        "Network Essentials",
-        "IT Essentials",
+        "Programming Essentials 1",
+        "Advanced React",
+        "Web Development Basics",
+        "Web essentials",
+        "IT essentials",
+        "Network essentials",
+        "Programming essentials 2",
+        "Data Essentials",
         "Desktop OS",
-        "Web Essentials",
-        "Study Life",
+        "Italent 1",
+        "Software Design essentials"
     ];
 
     const types = ["Discussion", "Explanation", "Study Resources", "Review"];

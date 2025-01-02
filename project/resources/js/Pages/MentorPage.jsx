@@ -26,13 +26,17 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             "John is an experienced developer specializing in front-end technologies.",
     };
     const courses = [
-        "Programming Essentials",
+        "Programming Essentials 1",
         "Advanced React",
         "Web Development Basics",
-        "efwfeefwefwefwefw",
-        "effweefwefwefw",
-        "fwefewefwefwefwfew",
-        "efwfewfewefwfe",
+        "Web essentials",
+        "IT essentials",
+        "Network essentials",
+        "Programming essentials 2",
+        "Data Essentials",
+        "Desktop OS",
+        "Italent 1",
+        "Software Design essentials"
     ];
 
     const [value, setValue] = useState(0);
