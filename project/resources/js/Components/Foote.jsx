@@ -21,7 +21,9 @@ const Foote = () => {
                     <li>
                         <a href={route('mentor.get')}>Mentors</a>
                     </li>
-
+                    <li>
+                        <a href={route('aboutus.get')}>About Us</a>
+                    </li>
                     <li>
                         <a href={route('profile.edit')}>Profile</a>
                     </li>
