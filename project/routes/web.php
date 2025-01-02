@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ForumController;
+use App\Http\Controllers\MentorApplicationController;
 use App\Http\Controllers\PointsController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\TestEmailController;
@@ -24,6 +25,12 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
+});
+
+use App\Models\Question;
+
+Route::get('/questions', function () {
+    return Question::all();
 });
 
 // About us route
@@ -86,7 +93,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Points route
     Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get');
+
+    Route::post('/mentor-applications', [MentorApplicationController::class, 'store']);
+    Route::get('/mentor-applications', [MentorApplicationController::class, 'index']);
+    Route::put('/mentor-applications/{application}', [MentorApplicationController::class, 'update']);
+
+    Route::get('/forum/ask-question', [ForumController::class, 'createQuestion'])->name('question.create');
+    Route::post('/forum/store-question', [ForumController::class, 'storeQuestion'])->name('question.store');
 });
+
+
 
 // Admin - GET routes (Requires login and admin access)
 Route::middleware(['auth', 'isAdmin'])->group(function () {
