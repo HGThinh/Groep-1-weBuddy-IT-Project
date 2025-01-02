@@ -6,24 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class MentorApplication extends Model
 {
-    protected $table="mentor_applications";
-    protected $primaryKey="mentor_application_id";
+    protected $fillable = [
+        'user_id',
+        'roles',
+        'courses',
+        'other_course',
+        'mode',
+        'languages',
+        'motivation',
+        'resume_path',
+        'status',
+    ];
 
-    protected $fillable=['grades','bio','location','rate','role','motivation_letter', 'student_id'];
+    protected $casts = [
+        'roles' => 'json',
+        'courses' => 'json',
+    ];
 
-
-    //relations
-
-    public function language(){
-        return $this->belongsToMany(Language::class);
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-
-    public function course(){
-        return $this->belongsToMany(Course::class);
-    }
-
-    public function student(){
-        return $this->belongsTo(Student::class);
-    }
-
 }
