@@ -1,7 +1,7 @@
 import Navbar from "@/Components/Navbar";
 import ResourceCard from "@/Components/ResourceCard";
 import Foote from "@/Components/Foote";
-import styles from "@/Components/Resource.module.css";
+import styles from "@/Components/ResourcePage.module.css";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const handleImageError = () => {
@@ -172,7 +172,14 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             </label>
                         </div>
                     </div>
-                    <ResourceCard items={resourcesData} />
+                    <div className={styles.containerResources2}>
+                        <h1>Recources</h1>
+                        <div className={styles.containerResources}>
+                            {resourcesData.map((resource, index) => (
+                                <ResourceCard key={index} resource={resource} />
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </main>
             <Foote />

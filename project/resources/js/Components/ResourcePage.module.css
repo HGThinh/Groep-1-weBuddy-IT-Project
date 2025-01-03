@@ -1,0 +1,169 @@
+.containerResources {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* Ensures proper spacing between rows */
+    gap: 20px;
+    /* Space between cards */
+
+    /* Center the container */
+}
+
+main {
+    margin: 0;
+}
+
+.containerResources2 {
+
+    /* Ensures proper spacing between rows */
+    width: 80%;
+    gap: 20px;
+    /* Space between cards */
+    padding: 20px;
+    background-color: #ffffff2f;
+    border-radius: 15px;
+    margin-top: 0;
+    margin-bottom: auto;
+    padding-bottom: 5rem;
+    /* Center the container */
+}
+
+.containerResources2 h1 {
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    /* Center the container */
+}
+
+.containerResource {
+    flex: 1 1 calc(25% - 20px);
+    /* 25% width of the container, minus the gap */
+    max-width: calc(25% - 20px);
+    /* Prevents exceeding 25% */
+    aspect-ratio: 1 / 1;
+    /* Ensures the card is always a square */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
+    background-color: #ff0000;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s ease;
+}
+
+.containerResource:hover {
+    background-color: #cc0000;
+    /* Slightly darker shade on hover */
+}
+
+
+.ContainerMenor {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 2%;
+
+}
+
+/* FilterComponent.module.css */
+.container {
+    width: 18%;
+    border-right: solid 1px #c9c9c9;
+    font-family: 'jersey-m54', sans-serif;
+    color: #1d375e;
+    padding: 16px;
+    margin-right: 1rem;
+}
+
+.headerSection {
+    color: #1BBCB6;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.headerSection h2 {
+    font-size: 1.2rem;
+    font-style: italic;
+}
+
+.headerTitle {
+    font-weight: 600;
+
+}
+
+.headerSection span {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.sectionTitle {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: white;
+    font-style: italic;
+}
+
+.filterGroup {
+    background-color: #c9c9c9;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-bottom: 16px;
+}
+
+.filterTitle {
+    color: white;
+    margin-top: 0;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.checkboxLabel,
+.radioLabel {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.checkbox,
+.radio {
+    height: 20px;
+    width: 20px;
+    margin-right: 8px;
+}
+
+.labelText {
+    font-size: 14px;
+}
+
+.inputLabel {
+    margin-bottom: 8px;
+}
+
+
+
+.rangeContainer {
+    display: flex;
+    align-items: center;
+}
+
+.rangeLabel {
+    font-size: 14px;
+}
+
+.rangeInput {
+    margin: 0 12px;
+    flex-grow: 1;
+}
