@@ -211,3 +211,13 @@ a {
   margin: 0 12px;
   flex-grow: 1;
 }
+
+.resourceCard h3,
+.resourceCard p,
+.resourceCard span,
+.resourceCard {
+  font-size: 1vw;
+  margin: 0;
+  gap: 0.3vw;
+  padding: 0.2vw;
+}
