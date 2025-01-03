@@ -1,29 +1,9 @@
 import Navbar from "@/Components/Navbar";
 import ResourceCard from "@/Components/ResourceCard";
 import Foote from "@/Components/Foote";
-import styles from "@/Components/CourseHomePage.module.css";
-import Question from "@/Components/QuestionForum";
-import Mentor from "@/Components/Mentor";
+import styles from "@/Components/Resource.module.css";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
-    const mentors = [
-        {
-            name: "John Doe",
-            points: 250,
-            role: "Buddy",
-            tags: ["React", "JavaScript", "CSS"],
-            description:
-                "John is an experienced developer specializing in front-end technologies.Vorig jaar hebben we ons vooral gefocust op de frontend van een website. We hebben geleerd hoe we een website kunnen opbouwen met HTML. Vorig jaar hebben we ons vooral gefocust op de frontend van een website. We hebben geleerd hoe we een website kunnen opbouwen met HTMLVorig jaar hebben we ons vooral gefocust op de frontend van een website. We hebben geleerd hoe we een website kunnen opbouwen met HTML ",
-        },
-        {
-            name: "John Doe",
-            points: 250,
-            role: "Buddy",
-            tags: ["React", "JavaScript", "CSS"],
-            description:
-                "John is an experienced developer specializing in front-end technologies.",
-        },
-    ];
     const handleImageError = () => {
         document
             .getElementById("screenshot-container")
@@ -91,20 +71,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             type: "doc",
             tags: ["Network Essentials", "Subnetting", "Dutch"],
         },
-    ];
-    const questions = [
         {
-            Name: "Mariana Z",
-            ProfilePicture: "/path/to/image.png",
-            TimePosted: "35 minutes",
-            Catgeory: "Programming Essentials",
-            QuestionTitle: "How to use React Hooks effectively?",
-            BoolAnswered: true,
-            tags: ["React", "Hooks", "JavaScript"],
-            Question:
-                "I'm struggling with understanding useState and useEffect. Can someone explain?",
-            upvotes: 45,
-            comments: 15,
+            title: "Study Planning - All Chapters",
+            description:
+                "A complete study plan to prepare for the exams effectively.",
+            type: "Notes",
+            tags: ["Study Tips", "Planning", "Exams"],
         },
     ];
 
@@ -112,82 +84,95 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         <>
             <Navbar items={courses} />
             <main>
-                <h1>Backend Web</h1>
-                <p className={styles.TitleDesc}>
-                    LVorig jaar hebben we ons vooral gefocust op de frontend van
-                    een website. We hebben geleerd hoe we een website kunnen
-                    opbouwen met HTML, CSS en JavaScript. We hebben geleerd hoe
-                    we een website kunnen stijlen, hoe we interactieve elementen
-                    kunnen toevoegen en hoe we de website kunnen laten reageren
-                    op gebruikersinput. Met andere woorden, we hebben ons tot
-                    nutoe gefocussed op het deel van de website dat de gebruiker
-                    ziet en waarmee deze interactie heeft. We kunnen dit
-                    vergelijken met de UI van een applicatie. De frontend is
-                    echter niet in staat om gegevens op te slaan, te verwerken
-                    of te manipuleren. Zelfs toen we via een fetch-call gegevens
-                    naar een API stuurden, was het de API die de gegevens
-                    verwerkte en opslaat. De backend is het deel van de website
-                    dat niet zichtbaar is voor de gebruiker. De backend is
-                    verantwoordelijk voor het verwerken van gegevens, het
-                    uitvoeren van berekeningen en het communiceren met de
-                    database, versturen van mails, genereren van PDFs, ... De
-                    backend is dus een essentieel deel voor het bouwen van
-                    dynamische websites en webapplicaties. Zonder een backend
-                    zouden we geen gegevens langduren kunnen bewaren of andere
-                    complexere berekeningen maken.
-                </p>
-                <h1>Mentors</h1>
-                <p className={styles.TitleDesc}>
-                    Mentors available for this course
-                </p>
-                <p className={styles.TitleDesc}>
-                    <a href="questioncourse">
-                        Go to mentors page for this course
-                    </a>
-                </p>
-                <p></p>
-                {mentors.length > 0 ? (
-                    mentors.map((mentor) => (
-                        <div className={styles.mentorCard} key={mentor.id}>
-                            <Mentor
-                                name={mentor.name}
-                                points={mentor.points}
-                                role={mentor.role}
-                                tags={mentor.tags}
-                                description={mentor.description}
-                            />
+                <div className={styles.ContainerMenor}>
+                    <div className={styles.container}>
+                        <a href="#" className={styles.headerSection}>
+                            <span>+</span>
+                            <h2 className={styles.headerTitle}>
+                                Upload Resource
+                            </h2>
+                        </a>
+
+                        <h3 className={styles.sectionTitle}>Filter by</h3>
+                        <h4 className={styles.filterTitle}>Courses</h4>
+                        <div className={styles.filterGroup}>
+                            {coursesTagsResource.map((course, index) => (
+                                <label
+                                    key={index}
+                                    className={styles.checkboxLabel}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        className={styles.checkbox}
+                                    />
+                                    <span className={styles.labelText}>
+                                        {course}
+                                    </span>
+                                </label>
+                            ))}
                         </div>
-                    ))
-                ) : (
-                    <p>No mentors available.</p>
-                )}
-                <h1>Forum</h1>
-                <p className={styles.TitleDesc}>
-                    Last 2 questions for this course
-                </p>
-                <p className={styles.TitleDesc}>
-                    <a href="questioncourse">
-                        Go to resource page for this course
-                    </a>
-                </p>
-                <br />
-                <Question data={questions} />
-                <h1>Recources</h1>
-                <p className={styles.TitleDesc}>
-                    Last 4 uploaded recources for this Course
-                </p>
-                <p className={styles.TitleDesc}>
-                    <a href="recourcecourse">
-                        Go to resource page for this course
-                    </a>
-                </p>
-                <br />
-                <div className={styles.containerResources2}>
-                    <div className={styles.containerResources}>
-                        {resourcesData.map((resource, index) => (
-                            <ResourceCard key={index} resource={resource} />
-                        ))}
+
+                        <h4 className={styles.filterTitle}>Type</h4>
+                        <div className={styles.filterGroup}>
+                            {TypeResource.map((type, index) => (
+                                <label
+                                    key={index}
+                                    className={styles.checkboxLabel}
+                                >
+                                    <input
+                                        type="checkbox"
+                                        className={styles.checkbox}
+                                    />
+                                    <span className={styles.labelText}>
+                                        {type}
+                                    </span>
+                                </label>
+                            ))}
+                        </div>
+
+                        <h4 className={styles.filterTitle}>Preiod</h4>
+                        <div className={styles.filterGroup}>
+                            <label className={styles.radioLabel}>
+                                <input
+                                    type="radio"
+                                    name="location"
+                                    className={styles.radio}
+                                />
+                                <span className={styles.labelText}>Today</span>
+                            </label>
+                            <label className={styles.radioLabel}>
+                                <input
+                                    type="radio"
+                                    name="location"
+                                    className={styles.radio}
+                                />
+                                <span className={styles.labelText}>
+                                    Last Week
+                                </span>
+                            </label>
+                            <label className={styles.radioLabel}>
+                                <input
+                                    type="radio"
+                                    name="location"
+                                    className={styles.radio}
+                                />
+                                <span className={styles.labelText}>
+                                    Last Month
+                                </span>
+                            </label>
+                            <label className={styles.radioLabel}>
+                                <input
+                                    type="radio"
+                                    name="location"
+                                    className={styles.radio}
+                                />
+                                <span className={styles.labelText}>
+                                    Last Year
+                                </span>
+                            </label>
+                        </div>
                     </div>
+                    <ResourceCard items={resourcesData} />
                 </div>
             </main>
             <Foote />
