@@ -1,170 +1,196 @@
-import React, { useState } from 'react';
+import Navbar from "@/Components/Navbar";
+import ResourceCard from "@/Components/ResourceCard";
+import Foote from "@/Components/Foote";
+import styles from "@/Components/CourseHomePage.module.css";
+import Question from "@/Components/QuestionForum";
+import Mentor from "@/Components/Mentor";
 
-export default function CreateQuestion() {
-    const [formData, setFormData] = useState({
-        title: '',
-        content: '',
-        category: 'Programming Essentials I',
-        tags: []
-    });
-    const [tagInput, setTagInput] = useState('');
-    const [errors, setErrors] = useState({});
-    const [isSubmitting, setIsSubmitting] = useState(false);
+export default function Welcome({ auth, laravelVersion, phpVersion }) {
+    const mentors = [
+        {
+            name: "John Doe",
+            points: 250,
+            role: "Buddy",
+            tags: ["React", "JavaScript", "CSS"],
+            description:
+                "John is an experienced developer specializing in front-end technologies.Vorig jaar hebben we ons vooral gefocust op de frontend van een website. We hebben geleerd hoe we een website kunnen opbouwen met HTML. Vorig jaar hebben we ons vooral gefocust op de frontend van een website. We hebben geleerd hoe we een website kunnen opbouwen met HTMLVorig jaar hebben we ons vooral gefocust op de frontend van een website. We hebben geleerd hoe we een website kunnen opbouwen met HTML ",
+        },
+        {
+            name: "John Doe",
+            points: 250,
+            role: "Buddy",
+            tags: ["React", "JavaScript", "CSS"],
+            description:
+                "John is an experienced developer specializing in front-end technologies.",
+        },
+    ];
+    const handleImageError = () => {
+        document
+            .getElementById("screenshot-container")
+            ?.classList.add("!hidden");
+        document.getElementById("docs-card")?.classList.add("!row-span-1");
+        document
+            .getElementById("docs-card-content")
+            ?.classList.add("!flex-row");
+        document.getElementById("background")?.classList.add("!hidden");
+    };
 
     const courses = [
-        "Programming Essentials I",
-        "Network Essentials",
+        "Programming Essentials",
+        "Advanced React",
+        "Web Development Basics",
+        "Programming Essentials 2",
         "IT Essentials",
         "Desktop OS",
-        "Web Essentials",
-        "Study Life",
+        "Network essentials",
+    ];
+    const coursesTagsResource = [
+        "Programming Essentials",
+        "Advanced React",
+        "Web Development Basics",
+        "Programming Essentials 2",
+        "IT Essentials",
+        "Desktop OS",
+        "Network essentials",
+    ];
+    const TypeResource = [
+        "Notes",
+        "Study planning",
+        "Summaries",
+        "Past Exams",
+        "Exercices",
     ];
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-
-        try {
-            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            const response = await fetch('/store-question', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken, // Add the CSRF token here
-                },
-                body: JSON.stringify(formData)
-            });
-
-            if (response.ok) {
-                window.location.href = '/forum';
-            } else {
-                const data = await response.json();
-                setErrors(data.errors || {});
-            }
-        } catch (error) {
-            console.error('Error submitting question:', error);
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-
-    const handleAddTag = () => {
-        if (tagInput && !formData.tags.includes(tagInput)) {
-            setFormData(prev => ({
-                ...prev,
-                tags: [...prev.tags, tagInput]
-            }));
-            setTagInput('');
-        }
-    };
-
-    const removeTag = (tagToRemove) => {
-        setFormData(prev => ({
-            ...prev,
-            tags: prev.tags.filter(tag => tag !== tagToRemove)
-        }));
-    };
+    //data of the resources (title, description, type, tags)
+    const resourcesData = [
+        {
+            title: "Summary - Chapter 4",
+            description:
+                "This is a summary of Chapter 4, covering subnetting and basic network concepts.",
+            type: "txt",
+            tags: ["Network Essentials", "Subnetting", "Dutch"],
+        },
+        {
+            title: "Study Planning - All Chapters",
+            description:
+                "A complete study plan to prepare for the exams effectively.",
+            type: "pdf",
+            tags: ["Study Tips", "Planning", "Exams"],
+        },
+        {
+            title: "Notes - Windows Chapters 1 & 2",
+            description:
+                "Detailed notes covering commands and shortcuts for Windows OS.",
+            type: "ppt",
+            tags: ["Windows", "Commands", "Shortcuts", "OS"],
+        },
+        {
+            title: "Summary - Chapter 4",
+            description:
+                "This is a summary of Chapter 4, covering subnetting and basic network concepts.",
+            type: "doc",
+            tags: ["Network Essentials", "Subnetting", "Dutch"],
+        },
+    ];
+    const questions = [
+        {
+            Name: "Mariana Z",
+            ProfilePicture: "/path/to/image.png",
+            TimePosted: "35 minutes",
+            Catgeory: "Programming Essentials",
+            QuestionTitle: "How to use React Hooks effectively?",
+            BoolAnswered: true,
+            tags: ["React", "Hooks", "JavaScript"],
+            Question:
+                "I'm struggling with understanding useState and useEffect. Can someone explain?",
+            upvotes: 45,
+            comments: 15,
+        },
+    ];
 
     return (
-        <div className="max-w-2xl mx-auto p-4 mt-8">
-            <h1 className="text-2xl font-bold mb-6">Ask a Question</h1>
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Title
-                    </label>
-                    <input
-                        type="text"
-                        value={formData.title}
-                        onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
-                        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.title && <div className="text-red-500 text-sm mt-1">{errors.title}</div>}
-                </div>
-
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Category
-                    </label>
-                    <select
-                        value={formData.category}
-                        onChange={e => setFormData(prev => ({ ...prev, category: e.target.value }))}
-                        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        {courses.map((course) => (
-                            <option key={course} value={course}>
-                                {course}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Content
-                    </label>
-                    <textarea
-                        value={formData.content}
-                        onChange={e => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                        rows={6}
-                        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                    {errors.content && <div className="text-red-500 text-sm mt-1">{errors.content}</div>}
-                </div>
-
-                <div>
-                    <label className="block text-sm font-medium text-gray-700">
-                        Tags
-                    </label>
-                    <div className="flex gap-2 mb-2">
-                        <input
-                            type="text"
-                            value={tagInput}
-                            onChange={e => setTagInput(e.target.value)}
-                            className="flex-1 rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="Add a tag"
-                        />
-                        <button
-                            type="button"
-                            onClick={handleAddTag}
-                            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                        >
-                            Add Tag
-                        </button>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                        {formData.tags.map((tag, index) => (
-                            <span
-                                key={index}
-                                className="inline-flex items-center gap-1 px-3 py-1 bg-blue-100 text-blue-800 rounded-full"
-                            >
-                                {tag}
-                                <button
-                                    type="button"
-                                    onClick={() => removeTag(tag)}
-                                    className="text-blue-600 hover:text-blue-800"
-                                >
-                                    ×
-                                </button>
-                            </span>
+        <>
+            <Navbar items={courses} />
+            <main>
+                <h1>Backend Web</h1>
+                <p className={styles.TitleDesc}>
+                    LVorig jaar hebben we ons vooral gefocust op de frontend van
+                    een website. We hebben geleerd hoe we een website kunnen
+                    opbouwen met HTML, CSS en JavaScript. We hebben geleerd hoe
+                    we een website kunnen stijlen, hoe we interactieve elementen
+                    kunnen toevoegen en hoe we de website kunnen laten reageren
+                    op gebruikersinput. Met andere woorden, we hebben ons tot
+                    nutoe gefocussed op het deel van de website dat de gebruiker
+                    ziet en waarmee deze interactie heeft. We kunnen dit
+                    vergelijken met de UI van een applicatie. De frontend is
+                    echter niet in staat om gegevens op te slaan, te verwerken
+                    of te manipuleren. Zelfs toen we via een fetch-call gegevens
+                    naar een API stuurden, was het de API die de gegevens
+                    verwerkte en opslaat. De backend is het deel van de website
+                    dat niet zichtbaar is voor de gebruiker. De backend is
+                    verantwoordelijk voor het verwerken van gegevens, het
+                    uitvoeren van berekeningen en het communiceren met de
+                    database, versturen van mails, genereren van PDFs, ... De
+                    backend is dus een essentieel deel voor het bouwen van
+                    dynamische websites en webapplicaties. Zonder een backend
+                    zouden we geen gegevens langduren kunnen bewaren of andere
+                    complexere berekeningen maken.
+                </p>
+                <h1>Mentors</h1>
+                <p className={styles.TitleDesc}>
+                    Mentors available for this course
+                </p>
+                <p className={styles.TitleDesc}>
+                    <a href="questioncourse">
+                        Go to mentors page for this course
+                    </a>
+                </p>
+                <p></p>
+                {mentors.length > 0 ? (
+                    mentors.map((mentor) => (
+                        <div className={styles.mentorCard} key={mentor.id}>
+                            <Mentor
+                                name={mentor.name}
+                                points={mentor.points}
+                                role={mentor.role}
+                                tags={mentor.tags}
+                                description={mentor.description}
+                            />
+                        </div>
+                    ))
+                ) : (
+                    <p>No mentors available.</p>
+                )}
+                <h1>Forum</h1>
+                <p className={styles.TitleDesc}>
+                    Last 2 questions for this course
+                </p>
+                <p className={styles.TitleDesc}>
+                    <a href="questioncourse">
+                        Go to resource page for this course
+                    </a>
+                </p>
+                <br />
+                <Question data={questions} />
+                <h1>Recources</h1>
+                <p className={styles.TitleDesc}>
+                    Last 4 uploaded recources for this Course
+                </p>
+                <p className={styles.TitleDesc}>
+                    <a href="recourcecourse">
+                        Go to resource page for this course
+                    </a>
+                </p>
+                <br />
+                <div className={styles.containerResources2}>
+                    <div className={styles.containerResources}>
+                        {resourcesData.map((resource, index) => (
+                            <ResourceCard key={index} resource={resource} />
                         ))}
                     </div>
                 </div>
-
-                <div>
-                    <button
-                        type="submit"
-                        disabled={isSubmitting}
-                        className="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:bg-blue-300"
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Submit Question'}
-                    </button>
-                </div>
-            </form>
-        </div>
+            </main>
+            <Foote />
+        </>
     );
 }
