@@ -12,18 +12,18 @@
     /* Ensure the component itself takes full width */
 }
 
-.containernameimage {
+.Question .containernameimage {
     align-items: center;
     display: flex;
 }
 
 
-.containerImg {
+.Question .containerImg {
     flex-shrink: 0;
     margin-right: 16px;
 }
 
-.containerImg img {
+.Question .containerImg img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -31,21 +31,21 @@
     border: 2px solid #ddd;
 }
 
-h2 {
+.Question h2 {
     font-size: 14px;
     color: #000000;
     margin: 0 0 8px;
     font-weight: 600;
 }
 
-h3 {
+.Question h3 {
     font-size: 16px;
     color: #000000;
     margin: 8px 0;
     font-weight: 700;
 }
 
-.tags {
+.Question .tags {
     display: flex;
     flex-wrap: wrap;
     list-style: none;
@@ -54,7 +54,7 @@ h3 {
     gap: 8px;
 }
 
-.textbox {
+.Question .textbox {
 
     padding: 0.3rem;
     padding-bottom: 2rem;
@@ -72,7 +72,7 @@ h3 {
 
 
 
-.Anwsered {
+.Question .Anwsered {
     background-color: #ffb545;
     color: white;
     font-weight: bold;
@@ -81,7 +81,7 @@ h3 {
     font-size: 12px;
 }
 
-.NotAnwsered {
+.Question .NotAnwsered {
     background-color: #ffb545;
     color: white;
     font-weight: bold;
@@ -90,7 +90,7 @@ h3 {
     font-size: 12px;
 }
 
-.tag {
+.Question .tag {
     background-color: #e4e6eb;
     color: #000000;
     border-radius: 12px;
@@ -98,13 +98,13 @@ h3 {
     font-size: 12px;
 }
 
-p {
+.Question p {
     font-size: 14px;
     color: #555;
     margin: 4px 0;
 }
 
-.footerQuestion {
+.Question .footerQuestion {
     margin-top: 8px;
     gap: 1rem;
     display: flex;
@@ -113,7 +113,7 @@ p {
     color: #144671;
 }
 
-.footerQuestion a {
+.Question .footerQuestion a {
     text-decoration: none;
     display: flex;
     align-items: center;
