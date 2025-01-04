@@ -7,11 +7,14 @@
     padding-top: 2rem;
     padding-bottom: 2rem;
     color: white;
-    justify-content: center;
+    justify-content: space-between;
     list-style-type: none;
     margin: 0;
 }
 
+main {
+    display: flex;
+}
 
 .AdminNavbar li img {
     width: 14rem;

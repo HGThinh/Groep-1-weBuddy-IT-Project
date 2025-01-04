@@ -10,28 +10,26 @@ const Foote = () => {
             <li>
                 <ul>
                     <li>
-                        <a href={route("forum.get")}>Forum</a>
+                        <a href={route("forum.get")}>Programs</a>
                     </li>
 
                     <li>
-                        <a href={route("resources.get")}>Resources</a>
+                        <a href={route("resources.get")}>Users</a>
                     </li>
 
                     <li>
-                        <a href={route("mentor.get")}>Mentors</a>
+                        <a href={route("mentor.get")}>Reports</a>
                     </li>
                     <li>
-                        <a href={route("aboutus.get")}>About Us</a>
-                    </li>
-                    <li>
-                        <a href={route("profile.edit")}>Profile</a>
+                        <a href={route("aboutus.get")}>Applications</a>
                     </li>
                 </ul>
             </li>
-            <br />
+
             <li>
                 <img src="Images/weBuddy.png" alt="" />
             </li>
+            <br />
         </ul>
     );
 };
