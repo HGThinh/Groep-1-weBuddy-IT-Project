@@ -24,6 +24,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         "Desktop OS",
         "Network essentials",
     ];
+    // courses =/= coursesTagsResource omdat courses alleen de courses die jij hebt , en coursesTagsResource alle tags zijn die een vraag hebben
     const coursesTagsResource = [
         "Programming Essentials",
         "Advanced React",
