@@ -1,0 +1,61 @@
+/* Wrapper om alles te centreren */
+.container {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    /* Horizontaal centreren */
+    align-items: center;
+    /* Verticaal centreren */
+    /* Zorg dat de container de volledige hoogte van het scherm inneemt */
+    /* Optioneel: achtergrondkleur toevoegen */
+}
+
+/* Cards-container styling */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    padding: 20px;
+}
+
+.cards-container a {
+    text-decoration: none;
+}
+
+/* Individuele card styling */
+.card {
+    background-color: #fdfdfd59;
+    /* Teal kleur */
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+}
+
+/* Icon-styling */
+.icon {
+    width: 270px;
+    height: 170px;
+    margin: 10px auto;
+    opacity: 0.5;
+}
+
+/* Specifieke icon styling */
+.forum-icon {
+    background: url('/path/to/forum-icon.png') no-repeat center center;
+    background-size: contain;
+}
+
+.resources-icon {
+    background: url('/path/to/resources-icon.png') no-repeat center center;
+    background-size: contain;
+}
+
+.mentor-icon {
+    background: url('/path/to/mentor-icon.png') no-repeat center center;
+    background-size: contain;
+}
