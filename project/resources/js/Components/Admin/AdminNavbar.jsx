@@ -25,11 +25,6 @@ const Foote = () => {
                     </li>
                 </ul>
             </li>
-
-            <li>
-                <img src="Images/weBuddy.png" alt="" />
-            </li>
-            <br />
         </ul>
     );
 };

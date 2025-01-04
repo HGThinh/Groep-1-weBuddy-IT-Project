@@ -1,6 +1,7 @@
 /* Wrapper om alles te centreren */
 .container {
-    width: 60%;
+    margin-top: 3rem;
+    width: 100%;
     display: flex;
     justify-content: center;
     /* Horizontaal centreren */
