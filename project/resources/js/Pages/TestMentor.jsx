@@ -7,12 +7,17 @@ import styles from "@/Components/Mentorpage.module.css";
 export default function Welcome({ mentors }) {
     const [mentorList, setMentorList] = useState(mentors);
     const [value, setValue] = useState(0);
+    const [selectedFilters, setSelectedFilters] = useState({
+        role: [],
+        language: [],
+        location: "",
+        maxRate: 15, // default max rate
+    });
 
     useEffect(() => {
         setMentorList(mentors);
     }, [mentors]);
 
-    //route
     const handleImageError = () => {
         document
             .getElementById("screenshot-container")
@@ -23,14 +28,28 @@ export default function Welcome({ mentors }) {
             ?.classList.add("!flex-row");
         document.getElementById("background")?.classList.add("!hidden");
     };
-    const mentorData = {
-        name: "John Doe",
-        points: 250,
-        role: "Buddy",
-        tags: ["React", "JavaScript", "CSS"],
-        description:
-            "John is an experienced developer specializing in front-end technologies.",
+
+    // Function to filter mentors based on the selected filters
+    const filterMentors = () => {
+        return mentorList.filter((mentor) => {
+            const isRoleValid =
+                selectedFilters.role.length === 0 ||
+                selectedFilters.role.includes(mentor.role);
+            const isLanguageValid =
+                selectedFilters.language.length === 0 ||
+                mentor.languages?.some((language) =>
+                    selectedFilters.language.includes(language)
+                );
+            const isLocationValid =
+                selectedFilters.location === "" ||
+                mentor.location === selectedFilters.location ||
+                selectedFilters.location === "Both"; // Assuming mentor location can be "Live", "Online", or "Both"
+            const isRateValid = mentor.rate <= selectedFilters.maxRate;
+
+            return isRoleValid && isLanguageValid && isLocationValid && isRateValid;
+        });
     };
+
     const courses = [
         "Programming Essentials 1",
         "Advanced React",
@@ -45,13 +64,12 @@ export default function Welcome({ mentors }) {
         "Software Design essentials"
     ];
 
-
     return (
         <>
             <Navbar items={courses} />
             <div className={styles.ContainerMenor}>
                 <div className={styles.container}>
-                    <a href="#" className={styles.headerSection}>
+                    <a href={route('mentor.request')} className={styles.headerSection}>
                         <span>+</span>
                         <h2 className={styles.headerTitle}>Become a mentor</h2>
                     </a>
@@ -60,11 +78,33 @@ export default function Welcome({ mentors }) {
                     <h4 className={styles.filterTitle}>Type</h4>
                     <div className={styles.filterGroup}>
                         <label className={styles.checkboxLabel}>
-                            <input type="checkbox" className={styles.checkbox} />
+                            <input
+                                type="checkbox"
+                                className={styles.checkbox}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        role: prev.role.includes("Tutor")
+                                            ? prev.role.filter((r) => r !== "Tutor")
+                                            : [...prev.role, "Tutor"],
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>Tutor</span>
                         </label>
                         <label className={styles.checkboxLabel}>
-                            <input type="checkbox" className={styles.checkbox} />
+                            <input
+                                type="checkbox"
+                                className={styles.checkbox}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        role: prev.role.includes("Student")
+                                            ? prev.role.filter((r) => r !== "Student")
+                                            : [...prev.role, "Student"],
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>Student</span>
                         </label>
                     </div>
@@ -72,15 +112,48 @@ export default function Welcome({ mentors }) {
                     <h4 className={styles.filterTitle}>Language</h4>
                     <div className={styles.filterGroup}>
                         <label className={styles.checkboxLabel}>
-                            <input type="checkbox" className={styles.checkbox} />
+                            <input
+                                type="checkbox"
+                                className={styles.checkbox}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        language: prev.language.includes("Dutch")
+                                            ? prev.language.filter((l) => l !== "Dutch")
+                                            : [...prev.language, "Dutch"],
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>Dutch</span>
                         </label>
                         <label className={styles.checkboxLabel}>
-                            <input type="checkbox" className={styles.checkbox} />
+                            <input
+                                type="checkbox"
+                                className={styles.checkbox}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        language: prev.language.includes("English")
+                                            ? prev.language.filter((l) => l !== "English")
+                                            : [...prev.language, "English"],
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>English</span>
                         </label>
                         <label className={styles.checkboxLabel}>
-                            <input type="checkbox" className={styles.checkbox} />
+                            <input
+                                type="checkbox"
+                                className={styles.checkbox}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        language: prev.language.includes("French")
+                                            ? prev.language.filter((l) => l !== "French")
+                                            : [...prev.language, "French"],
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>French</span>
                         </label>
                     </div>
@@ -88,15 +161,45 @@ export default function Welcome({ mentors }) {
                     <h4 className={styles.filterTitle}>Location</h4>
                     <div className={styles.filterGroup}>
                         <label className={styles.radioLabel}>
-                            <input type="radio" name="location" className={styles.radio} />
+                            <input
+                                type="radio"
+                                name="location"
+                                className={styles.radio}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        location: "Live",
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>Live</span>
                         </label>
                         <label className={styles.radioLabel}>
-                            <input type="radio" name="location" className={styles.radio} />
+                            <input
+                                type="radio"
+                                name="location"
+                                className={styles.radio}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        location: "Online",
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>Online</span>
                         </label>
                         <label className={styles.radioLabel}>
-                            <input type="radio" name="location" className={styles.radio} />
+                            <input
+                                type="radio"
+                                name="location"
+                                className={styles.radio}
+                                onChange={() =>
+                                    setSelectedFilters((prev) => ({
+                                        ...prev,
+                                        location: "Both",
+                                    }))
+                                }
+                            />
                             <span className={styles.labelText}>Both</span>
                         </label>
                     </div>
@@ -118,8 +221,8 @@ export default function Welcome({ mentors }) {
                     </div>
                 </div>
                 <div className={styles.mentorListContainer}>
-                    {mentorList.length > 0 ? (
-                        mentorList.map((mentor) => (
+                    {filterMentors().length > 0 ? (
+                        filterMentors().map((mentor) => (
                             <div className={styles.mentorCard} key={mentor.id}>
                                 <Mentor
                                     name={mentor.name}
@@ -127,6 +230,10 @@ export default function Welcome({ mentors }) {
                                     role={mentor.role}
                                     tags={mentor.tags}
                                     description={mentor.description}
+                                    languages={mentor.languages}
+                                    location={mentor.location}
+                                    bio={mentor.bio}
+                                    motivation_letter={mentor.motivation_letter}
                                 />
                             </div>
                         ))
