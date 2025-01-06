@@ -28,7 +28,7 @@ export default function CreateQuestion() {
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            const response = await fetch('/store-question', {
+            const response = await fetch('api/store-question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -39,6 +39,13 @@ export default function CreateQuestion() {
             });
 
             if (response.ok) {
+                alert('Question submitted successfully!');
+                setFormData({
+                    title: '',
+                    content: '',
+                    category: 'Programming Essentials I',
+                    tags: []
+                });
                 window.location.href = '/forum';
             } else {
                 const data = await response.json();
