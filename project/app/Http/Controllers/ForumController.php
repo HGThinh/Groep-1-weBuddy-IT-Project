@@ -14,14 +14,14 @@ class ForumController extends Controller
     {
 
         $questions = Question::all();
-        return Inertia::render('ForumPage', [
+        return Inertia::render('TestForumPage', [
             'questions' => $questions
         ]);
     }
 
     public function createQuestion()
     {
-        return Inertia::render('CreateQuestion');
+        return Inertia::render('TestCreateQuestion');
     }
 
     public function storeQuestion(Request $request)
@@ -32,6 +32,8 @@ class ForumController extends Controller
             'category' => 'required|string',
             'tags' => 'required|array'
         ]);
+
+        dd($request->all());
 
         $question = Question::create([
             'name' => Auth::user()->name ?? 'Anonymous',
