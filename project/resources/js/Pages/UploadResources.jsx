@@ -1,109 +1,124 @@
-//This is page for uploading resources
-import React, { useState } from 'react';
-import axios from 'axios';
-
+import React, { useState } from "react";
+import Navbar from "@/Components/Navbar";
+import Foote from "@/Components/Foote";
+import styles from "@/Components/UploadResource.module.css";
 const UploadResources = () => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
-    const [type, setType] = useState('');
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [type, setType] = useState("");
     const [tags, setTags] = useState([]);
     const [file, setFile] = useState(null);
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState("");
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]); // Set the file state
+    const handleFileChange = (e) => {
+        setFile(e.target.files[0]);
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        // Create a FormData object to send the file and other form data
+        // Prepare form data
         const formData = new FormData();
-        formData.append('title', title);
-        formData.append('description', description);
-        formData.append('type', type);
-        formData.append('tags', JSON.stringify(tags)); // Tags as a JSON string
-        formData.append('file', file); // Add the file
+        formData.append("title", title);
+        formData.append("description", description);
+        formData.append("type", type);
+        formData.append("tags[]", tags); // This sends tags as an array
+        formData.append("file", file);
 
         try {
-            // Send the data to the backend (Laravel API)
-            const response = await axios.post('http://localhost/api/upload-resource', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data', // Required for file uploads
-                },
-            });
+            const response = await fetch(
+                "http://127.0.0.1:8000/resources/add",
+                {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector(
+                            'meta[name="csrf-token"]'
+                        ).content,
+                    },
+                }
+            );
 
-            // Handle successful response
-            setMessage(response.data.message); // Success message
+            const result = await response.json();
+            if (response.ok) {
+                setMessage("Resource uploaded successfully!");
+            } else {
+                setMessage(`Error: ${result.message}`);
+            }
         } catch (error) {
-            // Handle error
-            console.error("Error uploading resource:", error);
-            setMessage("Failed to upload resource");
+            setMessage("An error occurred while uploading the resource.");
         }
     };
 
     return (
-        <div>
-            <h2>Upload Resource</h2>
-            {message && <p>{message}</p>}
+        <>
+            <Navbar
+                items={[
+                    "Programming Essentials",
+                    "Advanced React",
+                    "Web Development Basics",
+                    "Programming Essentials 2",
+                    "IT Essentials",
+                    "Desktop OS",
+                    "Network essentials",
+                ]}
+            />
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title</label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
+            <div>
+                <br />
+                {message && <p>{message}</p>}
 
-                <div>
-                    <label>Description</label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    />
-                </div>
+                <form onSubmit={handleSubmit}>
+                    <h2>Upload Resource</h2>
+                    <div>
+                        <label>Title</label>
+                        <input
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label>Type</label>
-                    <select
-                        value={type}
-                        onChange={(e) => setType(e.target.value)}
-                        required
-                    >
-                        <option value="">Select Type</option>
-                        <option value="txt">Text</option>
-                        <option value="pdf">PDF</option>
-                        <option value="ppt">PPT</option>
-                        <option value="doc">DOC</option>
-                    </select>
-                </div>
+                    <div>
+                        <label>Description</label>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label>Tags</label>
-                    <input
-                        type="text"
-                        value={tags.join(', ')}
-                        onChange={(e) => setTags(e.target.value.split(',').map(tag => tag.trim()))}
-                        required
-                    />
-                </div>
+                    <div>
+                        <label>Tags</label>
+                        <input
+                            type="text"
+                            value={tags.join(", ")}
+                            onChange={(e) =>
+                                setTags(
+                                    e.target.value
+                                        .split(",")
+                                        .map((tag) => tag.trim())
+                                )
+                            }
+                            required
+                        />
+                    </div>
 
-                <div>
-                    <label>Upload File</label>
-                    <input
-                        type="file"
-                        onChange={handleFileChange}
-                        required
-                    />
-                </div>
+                    <div>
+                        <label>Upload File</label>
+                        <input
+                            type="file"
+                            onChange={handleFileChange}
+                            required
+                        />
+                    </div>
 
-                <button type="submit">Upload</button>
-            </form>
-        </div>
+                    <button type="submit">Upload</button>
+                </form>
+            </div>
+            <Foote></Foote>
+        </>
     );
 };
 

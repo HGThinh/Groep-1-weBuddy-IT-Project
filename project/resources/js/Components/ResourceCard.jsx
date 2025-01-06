@@ -27,7 +27,11 @@ const ResourceCard = ({ resource }) => {
 
     return (
         <div className={styles.containerResource} style={{ backgroundColor }}>
-            <a href={resource.link || "#"}>
+            <a
+                href={`http://127.0.0.1:8000/resources/download/${resource.file_path}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 <div className={styles.resourceCard}>
                     {fileIcon !== fileTypeIcons.default && (
                         <div className={styles.fileTypeIcon}>
@@ -41,11 +45,15 @@ const ResourceCard = ({ resource }) => {
                     <h3>{resource.title}</h3>
                     <p className={styles.resourceType}>{resource.type}</p>
                     <div className={styles.resourceTags}>
-                        {resource.tags.map((tag, index) => (
-                            <span key={index} className={styles.resourceTag}>
-                                {tag}
-                            </span>
-                        ))}
+                        {resource.tags &&
+                            resource.tags.map((tag, index) => (
+                                <span
+                                    key={index}
+                                    className={styles.resourceTag}
+                                >
+                                    {tag}
+                                </span>
+                            ))}
                     </div>
                     <p className={styles.resourceDescription}>
                         {resource.description}
