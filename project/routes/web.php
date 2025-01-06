@@ -10,6 +10,8 @@ use App\Http\Controllers\MentorApplicationController;
 use App\Http\Controllers\PointsController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\TestEmailController;
+use App\Http\Controllers\TestMentorRequestController;
+use App\Models\Mentor;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +34,12 @@ use App\Models\Question;
 Route::get('/questions', function () {
     return Question::all();
 });
+
+
+Route::prefix('api')->group(function () {
+    Route::post('/testmentorrequest', [TestMentorRequestController::class, 'storeMentorRequest'])->name('mentor.request.store');
+});
+
 
 // About us route
 Route::get('/aboutus', [AboutUsController::class, 'getAboutus'])->name('aboutus.get');
@@ -75,6 +83,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mentor/profile/{id}', [MentorController::class, 'getMentorProfile'])->name('mentor.profile.get');
     Route::post('/mentor/request', [MentorController::class, 'sendRequest'])->name('mentor.request.post');
     Route::post('/mentor/application', [MentorController::class, 'sendApplication'])->name('mentor.application.post');
+    Route::get('/mentor/become-mentor', [MentorController::class, 'createMentorRequest'])->name('mentor.request');
+
+
 
     // Forum route
     Route::get('/forum', [ForumController::class, 'getForum'])->name('forum.get');
@@ -86,18 +97,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Resources route
     Route::get('/resources', [ResourcesController::class, 'getResources'])->name('resources.get');
+    Route::get('/api-resources', [ResourcesController::class, 'getResourcesAPI'])->name('resourcesapi.get');
     Route::get('/resources/post/{id}', [ResourcesController::class, 'getResourcesPost'])->name('resources.post.get');
-    Route::post('/resources/add', [ResourcesController::class, 'sendResources'])->name('resources.post.post');
+    Route::get('/resources/upload', [ResourcesController::class, 'getUploadResources'])->name('uploadresources.get');
+    Route::post('/resources/add', [ResourcesController::class, 'sendResources'])->name('resources.add');
     Route::put('/resources/post/{id}', [ResourcesController::class, 'updateResourcesPost'])->name('resources.post.update');
     Route::delete('/resources/post/{id}', [ResourcesController::class, 'deleteResources'])->name('resources.post.delete');
 
     // Points route
     Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get');
 
-    Route::post('/mentor-applications', [MentorApplicationController::class, 'store']);
+    // Mentor applications
+    Route::post('/mentor-applications', [MentorApplicationController::class, 'storeMentorApplication']);
     Route::get('/mentor-applications', [MentorApplicationController::class, 'index']);
     Route::put('/mentor-applications/{application}', [MentorApplicationController::class, 'update']);
 
+    // Forum questions route
     Route::get('/forum/ask-question', [ForumController::class, 'createQuestion'])->name('question.create');
     Route::post('/forum/store-question', [ForumController::class, 'storeQuestion'])->name('question.store');
 });
@@ -110,7 +125,13 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/admin/reports', [AdminController::class, 'getReports']);
     Route::get('/admin/posts', [AdminController::class, 'getPosts']);
     Route::get('/admin/comments', [AdminController::class, 'getComments']);
+
     Route::get('/admin/applications', [AdminController::class, 'getApplications']);
+    Route::get('/admin/api-applications', [AdminController::class, 'getApplicationsAPI']);
+    Route::get('/admin/testmentorrequest/{id}', [AdminController::class, 'showApplications']);
+    Route::delete('/admin/delete-applications/{id}', [AdminController::class, 'deleteApplications']);
+    Route::post('/admin/accept-application', [AdminController::class, 'acceptApplication']);
+
 
     Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
     Route::delete('/admin/posts/{id}', [AdminController::class, 'deletePost']);
