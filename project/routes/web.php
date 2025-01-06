@@ -100,12 +100,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/resources', [ResourcesController::class, 'getResources'])->name('resources.get');
     Route::get('/api-resources', [ResourcesController::class, 'getResourcesAPI'])->name('resourcesapi.get');
     Route::get('/resources/post/{id}', [ResourcesController::class, 'getResourcesPost'])->name('resources.post.get');
-
-    // Upload resources route (Milad)
     Route::get('/resources/upload', [ResourcesController::class, 'getUploadResources'])->name('uploadresources.get');
-    Route::post('/resources/add', [ResourcesController::class, 'sendResources'])->name('resources.add');
+    Route::post('/resources/add', [ResourcesController::class, 'store'])->name('resources.add');
+    Route::get('/resources/download/{filePath}', [ResourcesController::class, 'downloadFile'])
+    ->where('filePath', '.*') // Allow paths with slashes
+    ->name('resources.download');
 
-    //
+
     Route::put('/resources/post/{id}', [ResourcesController::class, 'updateResourcesPost'])->name('resources.post.update');
     Route::delete('/resources/post/{id}', [ResourcesController::class, 'deleteResources'])->name('resources.post.delete');
 
@@ -119,6 +120,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Forum questions route
     Route::get('/forum/ask-question', [ForumController::class, 'createQuestion'])->name('question.create');
+    Route::post('/forum/store-question', [ForumController::class, 'storeQuestion'])->name('question.store');
 });
 
 
