@@ -20,6 +20,11 @@ class MentorController extends Controller
         ]);
     }
 
+    public function createMentorRequest()
+    {
+        return Inertia::render('MentorRequest');
+    }
+
     // Retrieve mentor general information
     public function getInfo()
     {
