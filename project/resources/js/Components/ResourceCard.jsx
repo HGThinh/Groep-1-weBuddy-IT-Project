@@ -4,6 +4,7 @@ import styles from "./Resource.module.css";
 const fileTypeColors = {
     pdf: "#FF0000",
     doc: "#0078D4",
+    docx: "#0078D4",
     xls: "#217346",
     ppt: "#D24726",
     txt: "#808080",
@@ -13,6 +14,7 @@ const fileTypeColors = {
 const fileTypeIcons = {
     pdf: "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobeacrobatreader.svg",
     doc: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftword.svg",
+    docx: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftword.svg",
     xls: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftexcel.svg",
     ppt: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftpowerpoint.svg",
     txt: "https://uxwing.com/wp-content/themes/uxwing/download/file-and-folder-type/txt-file-icon.png",

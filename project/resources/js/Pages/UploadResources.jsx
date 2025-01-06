@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "@/Components/Navbar";
 import Foote from "@/Components/Foote";
 import styles from "@/Components/UploadResource.module.css";
+
 const UploadResources = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -9,20 +10,42 @@ const UploadResources = () => {
     const [tags, setTags] = useState([]);
     const [file, setFile] = useState(null);
     const [message, setMessage] = useState("");
+    const [selectedCourse, setSelectedCourse] = useState("");
+
+    // List of courses to choose from
+    const courses = [
+        "Programming Essentials",
+        "Advanced React",
+        "Web Development Basics",
+        "Programming Essentials 2",
+        "IT Essentials",
+        "Desktop OS",
+        "Network essentials",
+    ];
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
     };
 
+    const handleCourseChange = (course) => {
+        setSelectedCourse(course);
+        if (!tags.includes(course)) {
+            setTags((prevTags) => [...prevTags, course]); // Add course as a tag
+        }
+    };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const cleanedTags = tags
+            .map((tag) => tag.trim())
+            .filter((tag) => tag !== "");
 
         // Prepare form data
         const formData = new FormData();
         formData.append("title", title);
         formData.append("description", description);
         formData.append("type", type);
-        formData.append("tags[]", tags); // This sends tags as an array
+        cleanedTags.forEach((tag) => formData.append("tags[]", tag)); // Send cleaned tags
         formData.append("file", file);
 
         try {
@@ -42,6 +65,12 @@ const UploadResources = () => {
             const result = await response.json();
             if (response.ok) {
                 setMessage("Resource uploaded successfully!");
+                setTitle("");
+                setDescription("");
+                setType("");
+                setTags([]);
+                setFile(null);
+                setSelectedCourse("");
             } else {
                 setMessage(`Error: ${result.message}`);
             }
@@ -52,17 +81,7 @@ const UploadResources = () => {
 
     return (
         <>
-            <Navbar
-                items={[
-                    "Programming Essentials",
-                    "Advanced React",
-                    "Web Development Basics",
-                    "Programming Essentials 2",
-                    "IT Essentials",
-                    "Desktop OS",
-                    "Network essentials",
-                ]}
-            />
+            <Navbar items={courses} />
 
             <div>
                 <br />
@@ -70,6 +89,7 @@ const UploadResources = () => {
 
                 <form onSubmit={handleSubmit}>
                     <h2>Upload Resource</h2>
+
                     <div>
                         <label>Title</label>
                         <input
@@ -106,6 +126,21 @@ const UploadResources = () => {
                     </div>
 
                     <div>
+                        <label>Choose Course</label>
+                        <select
+                            value={selectedCourse}
+                            onChange={(e) => handleCourseChange(e.target.value)}
+                        >
+                            <option value="">Select a course</option>
+                            {courses.map((course, index) => (
+                                <option key={index} value={`.${course}`}>
+                                    .{course}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    <div>
                         <label>Upload File</label>
                         <input
                             type="file"
@@ -117,7 +152,8 @@ const UploadResources = () => {
                     <button type="submit">Upload</button>
                 </form>
             </div>
-            <Foote></Foote>
+
+            <Foote />
         </>
     );
 };
