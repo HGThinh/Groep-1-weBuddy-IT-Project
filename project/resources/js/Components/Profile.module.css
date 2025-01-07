@@ -1,0 +1,117 @@
+form {
+    margin: 0;
+    padding: 1rem;
+    background-color: #ffffff27;
+    /* Dark gray background (Tailwind gray-900) */
+    border: 1px solid #ffffff7e;
+    /* Slightly lighter gray for border */
+    border-radius: 8px;
+}
+
+main {
+    width: 80%;
+    margin: 1rem auto;
+}
+
+label {
+    color: white;
+}
+
+h2 {
+    color: #ffffff;
+    /* Light gray text (Tailwind gray-300) */
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+p {
+    color: #a0aec0;
+    /* Muted light gray text (Tailwind gray-400) */
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+input {
+    margin-bottom: 1rem;
+
+    padding: 0.5rem;
+    background-color: #2d37483f;
+    /* Darker input background (Tailwind gray-800) */
+    color: #e2e8f0;
+    /* Light gray text (Tailwind gray-300) */
+    border: 1px solid #ffffff6c;
+    /* Medium gray border */
+    border-radius: 4px;
+    width: 100%;
+    margin-top: 0.25rem;
+}
+
+input::placeholder {
+    color: #a0aec0;
+    /* Placeholder light gray text (Tailwind gray-400) */
+}
+
+button {
+    font-weight: bold;
+    background-color: #2c5282;
+    /* Blue button background (Tailwind blue-700) */
+    color: white;
+    /* White text */
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2b6cb0;
+    /* Slightly lighter blue on hover (Tailwind blue-600) */
+}
+
+section {
+    margin-bottom: 1.5rem;
+    background-color: #ffffff28;
+    /* Dark gray section background (Tailwind gray-900) */
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+/* Table Styles */
+table {
+    color: white;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Table Header */
+table th {
+    background-color: #f4f4f400;
+    font-weight: bold;
+    text-align: left;
+    padding: 12px 16px;
+    border: 1px solid #ddd;
+}
+
+/* Table Body */
+table td {
+    padding: 12px 16px;
+    border: 1px solid #dddddd69;
+}
+
+/* Table Rows - Alternating Colors */
+table tr:nth-child(even) {
+    background-color: #f9f9f94d;
+}
+
+table tr:nth-child(odd) {
+    background-color: #ffffff17;
+}

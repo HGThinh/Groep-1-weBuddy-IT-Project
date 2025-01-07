@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\Resource;
+
 
 class ProfileController extends Controller
 {
@@ -23,13 +25,21 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): Response // Request: object om toegang te krijgen tot alle info over het HTTP-verzoek
-    {
-        return Inertia::render('Profile/Edit', [ //component, hetzelfde als return view('Profile/Edit') maar dan React ipv Blade
-            'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail, //data die wordt meegegeven aan de component/view
-            'status' => session('status'),
-        ]);
-    }
+    public function edit(Request $request)
+{
+    $user = $request->user();
+
+    // Fetch all resources uploaded by the user
+    $userResources = Resource::where('user_id', $user->id)->get();
+
+    return Inertia::render('Profile/Edit', [
+        'mustVerifyEmail' => $user instanceof MustVerifyEmail,
+        'status' => session('status'),
+        'userResources' => $userResources, // Pass resources to frontend
+    ]);
+}
+
+    
 
     /**
      * Update the user's profile information.
