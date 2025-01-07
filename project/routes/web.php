@@ -18,6 +18,8 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\Course;
+use Illuminate\Support\Facades\Cache;
+
 
 Route::get('/test-email', [TestEmailController::class, 'sendVerificationEmail']);
 
@@ -67,6 +69,13 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+    // routes to get all the courses mainly for the navbar
+Route::get('/api/courses', function () {
+    return Cache::remember('courses', 60, function () {
+        return Course::all();
+    });
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     // Profile route
     Route::get('/profile', [ProfileController::class, 'getProfile'])->name('profile.get');
@@ -78,10 +87,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Course route
     Route::get('/course/{id}', [HomeController::class, 'get'])->name('course.get');
-    // routes/api.php
-    Route::get('/api/courses', function () {
-    return Course::all(); // This will return all courses as JSON
-    });
 
     // Mentor route
     Route::get('/mentor', [MentorController::class, 'getMentor'])->name('mentor.get');
