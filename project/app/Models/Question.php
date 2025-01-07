@@ -2,26 +2,15 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-    protected $table = 'testquestions';
 
-    protected $fillable = [
-        'name',
-        'profile_picture',
-        'category',
-        'title',
-        'content',
-        'is_answered',
-        'tags',
-        'upvotes',
-        'comments'
-    ];
+    protected $fillable = ['title', 'content', 'category', 'tags'];
 
     protected $casts = [
         'tags' => 'array',
-        'is_answered' => 'boolean',
     ];
 }
