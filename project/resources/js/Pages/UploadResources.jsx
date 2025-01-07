@@ -116,7 +116,7 @@ const UploadResources = () => {
                     </div>
 
                     <div>
-                        <label>Tags</label>
+                        <label>Tags (write a comma after each tag)</label>
                         <input
                             type="text"
                             value={tags.join(", ")}
@@ -147,7 +147,10 @@ const UploadResources = () => {
                     </div>
 
                     <div>
-                        <label>Upload File</label>
+                        <label>
+                            Upload File (supported files:
+                            pdf,doc,docx,ppt,txt,html,css,js|max:10 mb)
+                        </label>
                         <input
                             type="file"
                             onChange={handleFileChange}
