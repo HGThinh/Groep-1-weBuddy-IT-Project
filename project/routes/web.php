@@ -117,7 +117,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
     Route::put('/resources/post/{id}', [ResourcesController::class, 'updateResourcesPost'])->name('resources.post.update');
-    Route::delete('/resources/post/{id}', [ResourcesController::class, 'deleteResources'])->name('resources.post.delete');
+    Route::delete('/resources/delete/{id}', [ResourcesController::class, 'deleteResource']);
 
     // Points route
     Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get');

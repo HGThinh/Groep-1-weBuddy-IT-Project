@@ -50,30 +50,40 @@ class ResourcesController extends Controller
     {
         return Inertia::render('UploadResources');
     }
+
     public function getResourcesAPI()
-    {
-        // Fetch data from the database
-        $courses = Resource::distinct('title')->pluck('title');
-        $coursesTagsResource = Resource::distinct('tags')->pluck('tags');
-        $typeResource = Resource::distinct('type')->pluck('type');
-        $resourcesData = Resource::all();
-    
-        // Decode the tags field for each resource
-        $resourcesData = $resourcesData->map(function ($resource) {
-            $resource->tags = json_decode($resource->tags, true); // Decode JSON into an array
-            return $resource;
-        });
-    
-        // Format the data to match your desired structure
-        $data = [
-            'courses' => $courses,
-            'coursesTagsResource' => $coursesTagsResource,
-            'TypeResource' => $typeResource,
-            'resourcesData' => $resourcesData,
+{
+    // Fetch data from the database
+    $courses = Resource::distinct('title')->pluck('title');
+    $coursesTagsResource = Resource::distinct('tags')->pluck('tags');
+    $typeResource = Resource::distinct('type')->pluck('type');
+    $resourcesData = Resource::all();
+
+    // Decode the tags field for each resource and include IDs
+    $resourcesData = $resourcesData->map(function ($resource) {
+        $resource->tags = json_decode($resource->tags, true); // Decode JSON into an array
+        return [
+            'id' => $resource->id, // Add resource ID
+            'title' => $resource->title,
+            'description' => $resource->description,
+            'type' => $resource->type,
+            'tags' => $resource->tags,
+            'file_path' => $resource->file_path,
+            'created_at' => $resource->created_at,
         ];
-    
-        return response()->json($data);
-    }
+    });
+
+    // Format the data to match your desired structure
+    $data = [
+        'courses' => $courses,
+        'coursesTagsResource' => $coursesTagsResource,
+        'TypeResource' => $typeResource,
+        'resourcesData' => $resourcesData,
+    ];
+
+    return response()->json($data);
+}
+
     
 
 
@@ -102,11 +112,21 @@ class ResourcesController extends Controller
     }
 
     // Delete a resource by ID
-    public function deleteResources($id)
-    {
+    public function deleteResource($id)
+{
+    $resource = Resource::findOrFail($id);
 
-        return redirect()->route('resources.get')->with('success', 'Resource deleted successfully.');
+    // Delete the file from storage
+    if (Storage::exists($resource->file_path)) {
+        Storage::delete($resource->file_path);
     }
+
+    // Delete the resource record from the database
+    $resource->delete();
+
+    return redirect()->route('profile.edit')->with('success', 'Resource updated successfully.');
+}
+
 
     // Store Resource (including file)
     public function store(Request $request)
