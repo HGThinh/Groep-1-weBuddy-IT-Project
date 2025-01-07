@@ -5,7 +5,7 @@ import Foote from "@/Components/Foote";
 import styles from "@/Components/ResourcePage.module.css";
 import axios from "axios";
 
-export default function Welcome() {
+export default function Welcome({ courseTag, courseName }) {
     const [coursesTagsResource, setCoursesTagsResource] = useState([]);
     const [typeResource, setTypeResource] = useState([]);
     const [resourcesData, setResourcesData] = useState([]);
@@ -16,45 +16,51 @@ export default function Welcome() {
     const [selectedPeriod, setSelectedPeriod] = useState("");
 
     useEffect(() => {
-        // Fetch the data from the Laravel API
         axios
             .get("/api-resources")
             .then((response) => {
-                const {
-                    courses,
-                    coursesTagsResource,
-                    TypeResource,
-                    resourcesData,
-                } = response.data;
+                const { resourcesData, coursesTagsResource, TypeResource } =
+                    response.data;
 
-                // Parse, flatten, and clean course tags
-                const formattedTags = coursesTagsResource
+                // Parse and flatten coursesTagsResource
+                const flattenedTags = coursesTagsResource
                     .map((tag) =>
                         typeof tag === "string" ? JSON.parse(tag) : tag
-                    )
-                    .flat()
-                    .filter((tag) => tag && typeof tag === "string"); // Filter out null or invalid tags
-                const uniqueTags = [...new Set(formattedTags)];
-                const sortedTags = uniqueTags.sort((a, b) =>
-                    a.localeCompare(b, undefined, { sensitivity: "base" })
-                );
-                setCoursesTagsResource(sortedTags);
+                    ) // Parse JSON strings if needed
+                    .flat() // Flatten nested arrays
+                    .filter((tag) => tag && typeof tag === "string"); // Remove null/undefined and non-string values
 
+                // Remove duplicates and sort tags
+                const uniqueTags = [...new Set(flattenedTags)].sort();
+                setCoursesTagsResource(uniqueTags);
+
+                // Set typeResource
                 setTypeResource(TypeResource);
 
-                // Ensure resource tags are parsed
+                // Parse resources
                 const formattedResources = resourcesData.map((resource) => ({
                     ...resource,
                     tags: Array.isArray(resource.tags)
                         ? resource.tags
-                        : JSON.parse(resource.tags),
+                        : JSON.parse(resource.tags), // Parse JSON if needed
                 }));
                 setResourcesData(formattedResources);
+
+                // Initial filtering by courseTag
+                if (courseTag) {
+                    setSelectedTags([courseTag]);
+                    const filtered = formattedResources.filter((resource) =>
+                        resource.tags.includes(courseTag)
+                    );
+                    setFilteredResources(filtered);
+                } else {
+                    setFilteredResources(formattedResources);
+                }
             })
             .catch((error) => {
                 console.error("Error fetching resources:", error);
             });
-    }, []);
+    }, [courseTag]);
 
     const handleTagChange = (tag) => {
         setSelectedTags((prevTags) =>
@@ -75,15 +81,6 @@ export default function Welcome() {
     const handlePeriodChange = (period) => {
         setSelectedPeriod(period);
     };
-    const courses = [
-        "Programming Essentials",
-        "Advanced React",
-        "Web Development Basics",
-        "Programming Essentials 2",
-        "IT Essentials",
-        "Desktop OS",
-        "Network essentials",
-    ];
 
     // Filter resources based on selected filters
     const filteredResources = resourcesData.filter((resource) => {
@@ -123,7 +120,7 @@ export default function Welcome() {
 
     return (
         <>
-            <Navbar items={courses} />
+            <Navbar />
             <main>
                 <div className={styles.ContainerMenor}>
                     <div className={styles.container}>
