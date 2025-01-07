@@ -28,12 +28,12 @@ export default function CreateQuestion() {
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            const response = await fetch('api/store-question', {
+            const response = await fetch('/questions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken, // Add the CSRF token here
+                    'X-CSRF-TOKEN': csrfToken,
                 },
                 body: JSON.stringify(formData)
             });
