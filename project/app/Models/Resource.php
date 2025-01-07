@@ -11,6 +11,9 @@ class Resource extends Model
         'description',
         'type',
         'tags',
-        'file_path', // Add this field to fillable
+        'file_path',
+        'original_file_name', // Add this field
+        'user_id',
     ];
+    
 }

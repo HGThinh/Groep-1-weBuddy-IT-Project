@@ -6,9 +6,34 @@ use App\Models\Resource;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use phpDocumentor\Reflection\Types\Resource_;
+use Illuminate\Support\Facades\Storage;
+
+
+
 
 class ResourcesController extends Controller
 {
+    public function downloadFile($filePath)
+    {
+        // Controleer of het bestand bestaat
+        if (Storage::exists($filePath)) {
+            // Haal de resource op uit de database
+            $resource = Resource::where('file_path', $filePath)->first();
+    
+            if (!$resource) {
+                return response()->json(['message' => 'Resource not found'], 404);
+            }
+    
+            // Haal de originele naam van het bestand op
+            $originalFileName = $resource->original_file_name;
+    
+            // Gebruik Storage::download om het bestand te downloaden met de originele naam
+            return Storage::download($filePath, $originalFileName);
+        }
+    
+        return response()->json(['message' => 'File not found'], 404);
+    }
+    
     // Retrieve all resources
     public function getResources()
     {
@@ -23,54 +48,29 @@ class ResourcesController extends Controller
     }
     public function getResourcesAPI()
     {
-
-        // Example data, you can fetch from your database
+        // Fetch data from the database
+        $courses = Resource::distinct('title')->pluck('title');
+        $coursesTagsResource = Resource::distinct('tags')->pluck('tags');
+        $typeResource = Resource::distinct('type')->pluck('type');
+        $resourcesData = Resource::all();
+    
+        // Decode the tags field for each resource
+        $resourcesData = $resourcesData->map(function ($resource) {
+            $resource->tags = json_decode($resource->tags, true); // Decode JSON into an array
+            return $resource;
+        });
+    
+        // Format the data to match your desired structure
         $data = [
-            'courses' => [
-                "Programming Essentials",
-                "Advanced React",
-                "Web Development Basics",
-                "Programming Essentials 2",
-                "IT Essentials",
-                "Desktop OS",
-                "Network essentials"
-            ],
-            'coursesTagsResource' => [
-                "Programming Essentials",
-                "Advanced React",
-                "Web Development Basics",
-                "Programming Essentials 2",
-                "IT Essentials",
-                "Desktop OS",
-                "Network essentials"
-            ],
-            'TypeResource' => [
-                "Notes",
-                "Study planning",
-                "Summaries",
-                "Past Exams",
-                "Exercices"
-            ],
-            'resourcesData' => [
-                [
-                    'title' => "Summary - Chapter 4",
-                    'description' => "This is a summary of Chapter 4, covering subnetting and basic network concepts.",
-                    'type' => "txt",
-                    'tags' => ["Network Essentials", "Subnetting", "Dutch"]
-                ],
-                [
-                    'title' => "Study Planning - All Chapters",
-                    'description' => "A complete study plan to prepare for the exams effectively.",
-                    'type' => "pdf",
-                    'tags' => ["Study Tips", "Planning", "Exams"]
-                ]
-                // Add more resources as needed
-            ]
+            'courses' => $courses,
+            'coursesTagsResource' => $coursesTagsResource,
+            'TypeResource' => $typeResource,
+            'resourcesData' => $resourcesData,
         ];
-
+    
         return response()->json($data);
-        // Render the Inertia page and pass data
     }
+    
 
 
     // Retrieve a single resource by ID
@@ -106,34 +106,40 @@ class ResourcesController extends Controller
 
     // Store Resource (including file)
     public function store(Request $request)
-    {
-        // Validate incoming data
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'type' => 'required|string',
-            'tags' => 'required|array',
-            'file' => 'required|file|mimes:pdf,doc,docx,ppt,txt|max:10240', // max file size 10MB
+{
+    // Validate incoming data
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'tags' => 'required|array',
+        'file' => 'required|file|mimes:pdf,doc,docx,ppt,txt,html,css,js|max:10240', // max file size 10MB
+    ]);
+
+    // Handle the file upload
+    if ($request->hasFile('file')) {
+        $file = $request->file('file');
+        $originalFileName = $file->getClientOriginalName(); // Get the original file name
+        $path = $file->store('resources'); // Store the file in 'resources' folder within storage/app
+
+        // Derive the file type from the file name
+        $fileType = pathinfo($originalFileName, PATHINFO_EXTENSION);
+
+        // Save the resource record in the database, including file path and type
+        $resource = Resource::create([
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
+            'type' => $fileType, // Use the derived file type
+            'tags' => json_encode($validatedData['tags']), // Store tags as JSON
+            'file_path' => $path, // Save the file path
+            'original_file_name' => $originalFileName, // Store the original file name
+            'user_id' => auth()->id(), // Save the user ID
         ]);
 
-        // Handle the file upload
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $path = $file->store('resources'); // Store in 'resources' folder within storage/app
-
-            // Save the resource record in the database, including file path
-            $resource = Resource::create([
-                'title' => $validatedData['title'],
-                'description' => $validatedData['description'],
-                'type' => $validatedData['type'],
-                'tags' => json_encode($validatedData['tags']), // Store tags as JSON
-                'file_path' => $path, // Save the file path in the database
-            ]);
-
-            // Return a success response
-            return response()->json(['message' => 'Resource uploaded successfully!', 'resource' => $resource], 201);
-        }
-
-        return response()->json(['message' => 'No file uploaded'], 400);
+        // Return a success response
+        return response()->json(['message' => 'Resource uploaded successfully!', 'resource' => $resource], 201);
     }
+
+    return response()->json(['message' => 'No file uploaded'], 400);
+}
+
 }

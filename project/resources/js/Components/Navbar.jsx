@@ -1,8 +1,25 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
+import axios from "axios";
 import styles from "./Navbar.module.css";
 
-const Navbar = ({ items }) => {
+const Navbar = () => {
     const coursesRef = useRef(null);
+    const [courses, setCourses] = useState([]);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        // Fetch courses from the Laravel API
+        axios
+            .get("/api/courses") // Adjust this endpoint based on your backend route
+            .then((response) => {
+                // Assuming the response contains a list of courses with a "name" field
+                setCourses(response.data.map((course) => course.course));
+            })
+            .catch((error) => {
+                console.error("Error fetching courses:", error);
+                setError("Unable to load courses.");
+            });
+    }, []);
 
     const scrollCourses = (direction) => {
         if (coursesRef.current) {
@@ -20,19 +37,19 @@ const Navbar = ({ items }) => {
                 <img src="/Images/weBuddy.png" alt="WeBuddy Logo" />
                 <ul>
                     <li>
-                        <a href={route('forum.get')}>Forum</a>
+                        <a href={route("forum.get")}>Forum</a>
                     </li>
                     <li>
-                        <a href={route('resources.get')}>Resources</a>
+                        <a href={route("resources.get")}>Resources</a>
                     </li>
                     <li>
-                        <a href={route('mentor.get')}>Mentors</a>
+                        <a href={route("mentor.get")}>Mentors</a>
                     </li>
                     <li>
-                        <a href={route('aboutus.get')}>About Us</a>
+                        <a href={route("aboutus.get")}>About Us</a>
                     </li>
                     <li>
-                        <a className={styles.icon} href={route('profile.edit')}>
+                        <a className={styles.icon} href={route("profile.edit")}>
                             <img
                                 src="/Images/iconprofile.png"
                                 alt="Profile Icon"
@@ -50,13 +67,15 @@ const Navbar = ({ items }) => {
                 </button>
                 <div className={styles.Courses} ref={coursesRef}>
                     <ul>
-                        {items.map((course, index) => (
-                            <li key={index}>
-                                <a href={`linktothecourse/${course}`}>
-                                    {course}
-                                </a>
-                            </li>
-                        ))}
+                        {error ? (
+                            <li>{error}</li>
+                        ) : (
+                            courses.map((course, index) => (
+                                <li key={index}>
+                                    <a href={`course/${course}`}>{course}</a>
+                                </li>
+                            ))
+                        )}
                     </ul>
                 </div>
                 <button

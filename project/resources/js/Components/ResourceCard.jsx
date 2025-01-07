@@ -4,6 +4,7 @@ import styles from "./Resource.module.css";
 const fileTypeColors = {
     pdf: "#FF0000",
     doc: "#0078D4",
+    docx: "#0078D4",
     xls: "#217346",
     ppt: "#D24726",
     txt: "#808080",
@@ -13,6 +14,7 @@ const fileTypeColors = {
 const fileTypeIcons = {
     pdf: "https://cdn.jsdelivr.net/npm/simple-icons/icons/adobeacrobatreader.svg",
     doc: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftword.svg",
+    docx: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftword.svg",
     xls: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftexcel.svg",
     ppt: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftpowerpoint.svg",
     txt: "https://uxwing.com/wp-content/themes/uxwing/download/file-and-folder-type/txt-file-icon.png",
@@ -27,7 +29,11 @@ const ResourceCard = ({ resource }) => {
 
     return (
         <div className={styles.containerResource} style={{ backgroundColor }}>
-            <a href={resource.link || "#"}>
+            <a
+                href={`http://127.0.0.1:8000/resources/download/${resource.file_path}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
                 <div className={styles.resourceCard}>
                     {fileIcon !== fileTypeIcons.default && (
                         <div className={styles.fileTypeIcon}>
@@ -41,11 +47,15 @@ const ResourceCard = ({ resource }) => {
                     <h3>{resource.title}</h3>
                     <p className={styles.resourceType}>{resource.type}</p>
                     <div className={styles.resourceTags}>
-                        {resource.tags.map((tag, index) => (
-                            <span key={index} className={styles.resourceTag}>
-                                {tag}
-                            </span>
-                        ))}
+                        {resource.tags &&
+                            resource.tags.map((tag, index) => (
+                                <span
+                                    key={index}
+                                    className={styles.resourceTag}
+                                >
+                                    {tag}
+                                </span>
+                            ))}
                     </div>
                     <p className={styles.resourceDescription}>
                         {resource.description}

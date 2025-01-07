@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('type');
             $table->json('tags'); // Store tags as JSON
             $table->string('file_path')->nullable();
+            $table->string('original_file_name')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
