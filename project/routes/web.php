@@ -109,7 +109,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/resources', [ResourcesController::class, 'getResources'])->name('resources.get');
     Route::get('/api-resources', [ResourcesController::class, 'getResourcesAPI'])->name('resourcesapi.get');
     Route::get('/resources/post/{id}', [ResourcesController::class, 'getResourcesPost'])->name('resources.post.get');
-    Route::get('/resources/upload', [ResourcesController::class, 'getUploadResources'])->name('uploadresources.get');
+    Route::get('/resources/upload/file', [ResourcesController::class, 'getUploadResources'])->name('uploadresources.get');
     Route::post('/resources/add', [ResourcesController::class, 'store'])->name('resources.add');
     Route::get('/resources/download/{filePath}', [ResourcesController::class, 'downloadFile'])
     ->where('filePath', '.*') // Allow paths with slashes
