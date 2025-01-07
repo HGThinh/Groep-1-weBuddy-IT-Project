@@ -2,36 +2,35 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Course extends Model
 {
+    use HasFactory;
+
+    // Define the table name (if it's not the default pluralized form)
     protected $table = 'courses';
+
+    // Define the primary key
     protected $primaryKey = 'course_id';
 
-    // which attributes should be mass assignable
+    // Disable auto-incrementing if not using it
+    public $incrementing = true;
+
+    // Specify the key type if the primary key is not an integer
+    protected $keyType = 'int';
+
+    // Fields that are mass assignable
     protected $fillable = [
-        'course', 'semester'];
+        'course_id',
+        'course',
+        'semester',
+    ];
 
-
-    //relations
-    public function mentor(){
-        return $this->belongsToMany(Mentor::class);
-    }
-
-    public function student(){
-        return $this->belongsToMany(Student::class);
-    }
-
-    public function degree(){
-        return $this->belongstoMany(Degree::class);
-    }
-
-    public function mentorApplication(){
-        return $this->belongstoMany(MentorApplication::class);
-    }
-
-    public function mentorRequest(){
-        return $this->belongsToMany(MentorRequest::class);
-    }   
+    // Fields to cast to specific data types
+    protected $casts = [
+        'course_id' => 'integer',
+        'semester' => 'integer',
+    ];
 }
