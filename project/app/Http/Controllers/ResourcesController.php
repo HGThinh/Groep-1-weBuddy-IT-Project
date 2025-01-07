@@ -35,12 +35,16 @@ class ResourcesController extends Controller
     }
     
     // Retrieve all resources
-    public function getResources()
+    public function getResources($courseName = null)
     {
+        $courseTag = $courseName ? '.' . urldecode($courseName) : null;
 
-
-        // Render the Inertia page and pass data
-        return Inertia::render('TestResourcesPage', []);
+        // Render the Inertia page, passing the course tag
+        return Inertia::render('TestResourcesPage', [
+            'courseTag' => $courseTag,
+            'courseName' => $courseName, // For display purposes
+        ]);
+    
     }
     public function getUploadResources()
     {
