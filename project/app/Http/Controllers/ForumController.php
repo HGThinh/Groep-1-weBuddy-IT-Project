@@ -9,11 +9,29 @@ use Inertia\Inertia;
 
 class ForumController extends Controller
 {
-    // Retrieve all forum posts
+    // // Retrieve all forum posts
+    // public function getForum()
+    // {
+
+    //     $questions = Question::all();
+    //     return Inertia::render('TestForumPage', [
+    //         'questions' => $questions
+    //     ]);
+    // }
+
     public function getForum()
     {
+        $questions = Question::latest()->get()->map(function ($question) {
+            return [
+                'id' => $question->id,
+                'title' => $question->title,
+                'content' => $question->content,
+                'category' => $question->category,
+                'tags' => $question->tags,
+                'created_at' => $question->created_at->diffForHumans()
+            ];
+        });
 
-        $questions = Question::all();
         return Inertia::render('TestForumPage', [
             'questions' => $questions
         ]);
@@ -26,16 +44,15 @@ class ForumController extends Controller
 
     public function storeQuestion(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'category' => 'required|string',
             'tags' => 'required|array'
         ]);
 
-        dd($request->all());
 
-        $question = Question::create([
+        $userQuestion = Question::create([
             'name' => Auth::user()->name ?? 'Anonymous',
             'title' => $request->title,
             'content' => $request->content,
@@ -46,7 +63,10 @@ class ForumController extends Controller
             'comments' => 0
         ]);
 
-        return redirect()->route('forum.get');
+        return response()->json([
+            'message' => 'Question submitted successfully!',
+            'data' => $userQuestion,
+        ], 201);
     }
 
     // Retrieve a single forum post by ID
