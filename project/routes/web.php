@@ -70,11 +70,9 @@ Route::post('/email/verification-notification', function (Request $request) {
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
     // routes to get all the courses mainly for the navbar
-Route::get('/api/courses', function () {
-    return Cache::remember('courses', 60, function () {
-        return Course::all();
+    Route::get('/api/courses', function () {
+        return Course::select('course_id', 'course')->get();
     });
-});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Profile route
@@ -86,7 +84,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'getHome'])->name('home.get');
 
     // Course route
-    Route::get('/course/{id}', [HomeController::class, 'get'])->name('course.get');
+    Route::get('/course/{id}', [HomeController::class, 'getCoursePage'])->name('coursePage.get');
 
     // Mentor route
     Route::get('/mentor', [MentorController::class, 'getMentor'])->name('mentor.get');
@@ -107,6 +105,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/forum/post/{id}', [ForumController::class, 'deletePost'])->name('forum.post.delete');
 
     // Resources route
+    Route::get('/resources/{courseName?}', [ResourcesController::class, 'getResources'])->name('resources.get');
     Route::get('/resources', [ResourcesController::class, 'getResources'])->name('resources.get');
     Route::get('/api-resources', [ResourcesController::class, 'getResourcesAPI'])->name('resourcesapi.get');
     Route::get('/resources/post/{id}', [ResourcesController::class, 'getResourcesPost'])->name('resources.post.get');
