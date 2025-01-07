@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Models\Course;
 
 Route::get('/test-email', [TestEmailController::class, 'sendVerificationEmail']);
 
@@ -77,6 +78,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Course route
     Route::get('/course/{id}', [HomeController::class, 'get'])->name('course.get');
+    // routes/api.php
+    Route::get('/api/courses', function () {
+    return Course::all(); // This will return all courses as JSON
+    });
 
     // Mentor route
     Route::get('/mentor', [MentorController::class, 'getMentor'])->name('mentor.get');

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "@/Components/Navbar";
 import Foote from "@/Components/Foote";
+import axios from "axios";
 import styles from "@/Components/UploadResource.module.css";
 
 const UploadResources = () => {
@@ -13,15 +14,20 @@ const UploadResources = () => {
     const [selectedCourse, setSelectedCourse] = useState("");
 
     // List of courses to choose from
-    const courses = [
-        "Programming Essentials",
-        "Advanced React",
-        "Web Development Basics",
-        "Programming Essentials 2",
-        "IT Essentials",
-        "Desktop OS",
-        "Network essentials",
-    ];
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() => {
+        // Fetch courses from the Laravel API
+        axios
+            .get("/api/courses") // Adjust the endpoint based on your Laravel route
+            .then((response) => {
+                setCourses(response.data.map((course) => course.course)); // Assuming the `name` field contains the course name
+            })
+            .catch((error) => {
+                console.error("Error fetching courses:", error);
+                setMessage("Unable to load courses.");
+            });
+    }, []);
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
