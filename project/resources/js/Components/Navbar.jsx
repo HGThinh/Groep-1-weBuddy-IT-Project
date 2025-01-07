@@ -8,12 +8,10 @@ const Navbar = () => {
     const [error, setError] = useState("");
 
     useEffect(() => {
-        // Fetch courses from the Laravel API
         axios
-            .get("/api/courses") // Adjust this endpoint based on your backend route
+            .get("/api/courses")
             .then((response) => {
-                // Assuming the response contains a list of courses with a "name" field
-                setCourses(response.data.map((course) => course.course));
+                setCourses(response.data);
             })
             .catch((error) => {
                 console.error("Error fetching courses:", error);
@@ -70,9 +68,11 @@ const Navbar = () => {
                         {error ? (
                             <li>{error}</li>
                         ) : (
-                            courses.map((course, index) => (
-                                <li key={index}>
-                                    <a href={`course/${course}`}>{course}</a>
+                            courses.map((course) => (
+                                <li key={course.course_id}>
+                                    <a href={`/course/${course.course_id}`}>
+                                        {course.course}
+                                    </a>
                                 </li>
                             ))
                         )}
