@@ -295,7 +295,7 @@ export default function Welcome({ mentors }) {
             <Navbar items={courses} />
             <div className={styles.ContainerMenor}>
                 <div className={styles.container}>
-                    <a href="#" className={styles.headerSection}>
+                    <a href={route('mentor.request')} className={styles.headerSection}>
                         <span>+</span>
                         <h2 className={styles.headerTitle}>Become a mentor</h2>
                     </a>
