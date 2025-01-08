@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mentor;
+use App\Models\MentorRequest;
 use App\Models\TestMentorRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 class AdminController extends Controller
@@ -18,10 +21,16 @@ class AdminController extends Controller
         // return view('users', compact('users'));
         return Inertia::render('AdminUsers', []);
     }
+    // Ensure this method is defined
+    public function getMenu()
+    {
+
+        return Inertia::render('AdminManagement', []);
+    }
 
     public function getApplications()
     {
-        $applications = TestMentorRequest::all(); // Fetch mentor applications
+        $applications = MentorRequest::all(); // Fetch mentor applications
 
         // return Inertia::render('AdminMentorApplications', [
         //     'applications' => $applications, // Pass applications data to the React component
@@ -33,12 +42,18 @@ class AdminController extends Controller
 
     public function getApplicationsAPI()
     {
-        try {
-            $applications = TestMentorRequest::all();
-            return response()->json($applications, 200);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to fetch applications.', 'error' => $e->getMessage()], 500);
-        }
+        // try {
+        //     $applications = TestMentorRequest::all();
+        //     return response()->json($applications, 200);
+        // } catch (\Exception $e) {
+        //     return response()->json(['message' => 'Failed to fetch applications.', 'error' => $e->getMessage()], 500);
+        // }
+        $applications = MentorRequest::with('user')->get()->map(function ($application) {
+            $application->name = $application->user ? $application->user->name : 'Unknown User';
+            return $application;
+        });
+
+        return response()->json($applications);
     }
 
     /**
@@ -59,35 +74,57 @@ class AdminController extends Controller
      */
     public function deleteApplications($id)
     {
-        $application = TestMentorRequest::find($id);
-
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
+        $application = MentorRequest::findOrFail($id);
         $application->delete();
-
         return response()->json(['message' => 'Application deleted successfully']);
     }
 
-    public function acceptApplication(TestMentorRequest $request)
+    public function acceptApplication(Request $request)
     {
-        $data = $request->validated(); // Use validated data from the form request class
+        try {
+            $mentorRequest = MentorRequest::with('user')->findOrFail($request->id);
+            $userName = $mentorRequest->user ? $mentorRequest->user->name : 'Unknown User';
 
-        // Use Mentor model to create a new record
-        $mentor = Mentor::create([
-            'application_id' => $data['id'], // assuming you store the application ID
-            'name' => $data['name'],
-            'points' => $data['points'],
-            'role' => $data['role'],
-            'rate' => $data['rate'],
-            'tags' => json_encode($data['tags']),
-            'languages' => $data['languages'] ? json_encode($data['languages']) : null, // Encode languages array to JSON if provided
-            'location' => $data['location'],
-            'bio' => $data['bio'],
-            'motivation_letter' => $data['motivation_letter'],
-            'link_resume' => $data['link_resume'],
-        ]);
-        return response()->json($mentor, 201);
+            $validated = $request->validate([
+                'id' => 'required|exists:mentor_requests,id',
+                'points' => 'required|integer',
+                'role' => 'required|string',
+                'tags' => 'required|array',
+                'languages' => 'required|array',
+                'location' => 'required|string',
+                'bio' => 'required|string',
+                'motivation_letter' => 'required|string',
+                'rate' => 'nullable|string',
+            ]);
+
+            // Create new mentor with user's name
+            $mentor = Mentor::create([
+                'name' => $userName,
+                'points' => $validated['points'],
+                'role' => $validated['role'],
+                'tags' => json_encode($validated['tags']),
+                'languages' => json_encode($validated['languages']),
+                'location' => $validated['location'],
+                'bio' => $validated['bio'],
+                'motivation_letter' => $validated['motivation_letter'],
+                'rate' => $validated['rate'] ?? null,
+                'user_id' => $mentorRequest->user_id, // Add this line to store user_id
+            ]);
+
+            // Delete the original request
+            $mentorRequest->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Application accepted successfully',
+                'mentor' => $mentor
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error accepting application',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 }
