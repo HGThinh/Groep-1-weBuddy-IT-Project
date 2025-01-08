@@ -6,8 +6,10 @@ const Navbar = () => {
     const coursesRef = useRef(null);
     const [courses, setCourses] = useState([]);
     const [error, setError] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false); // State to track if user is admin
 
     useEffect(() => {
+        // Fetch courses
         axios
             .get("/api/courses")
             .then((response) => {
@@ -16,6 +18,16 @@ const Navbar = () => {
             .catch((error) => {
                 console.error("Error fetching courses:", error);
                 setError("Unable to load courses.");
+            });
+
+        // Fetch user role or permissions
+        axios
+            .get("/api/user/role")
+            .then((response) => {
+                setIsAdmin(response.data.isAdmin); // Assuming `isAdmin` is returned from backend
+            })
+            .catch((error) => {
+                console.error("Error fetching user role:", error);
             });
     }, []);
 
@@ -34,6 +46,15 @@ const Navbar = () => {
             <div className={styles.navbar}>
                 <img src="/Images/weBuddy.png" alt="WeBuddy Logo" />
                 <ul>
+                    {isAdmin && ( // Only show Admin Panel if user is admin
+                        <li>
+                            <a href={"/admin"}>
+                                <div className={styles.adminPanel}>
+                                    Admin Panel
+                                </div>
+                            </a>
+                        </li>
+                    )}
                     <li>
                         <a href={route("forum.get")}>Forum</a>
                     </li>
