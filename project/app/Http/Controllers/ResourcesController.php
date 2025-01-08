@@ -136,7 +136,7 @@ class ResourcesController extends Controller
         'title' => 'required|string|max:255',
         'description' => 'required|string',
         'tags' => 'required|array',
-        'file' => 'required|file|mimes:pdf,doc,docx,ppt,txt,html,css,js|max:10240', // max file size 10MB
+        'file' => 'required|file|mimes:pdf,doc,docx,ppt,pptx,txt,html,css,js|max:10240', // max file size 10MB
     ]);
 
     // Handle the file upload
