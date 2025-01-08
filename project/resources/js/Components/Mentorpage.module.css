@@ -7,6 +7,10 @@
 
 }
 
+.mentorGrid {
+    width: 60%;
+}
+
 /* FilterComponent.module.css */
 .container {
     width: 20%;
