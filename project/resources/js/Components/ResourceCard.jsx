@@ -7,6 +7,7 @@ const fileTypeColors = {
     docx: "#0078D4",
     xls: "#217346",
     ppt: "#D24726",
+    pptx: "#D24726",
     txt: "#808080",
     default: "#ffffff2c",
 };
@@ -17,6 +18,7 @@ const fileTypeIcons = {
     docx: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftword.svg",
     xls: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftexcel.svg",
     ppt: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftpowerpoint.svg",
+    pptx: "https://cdn.jsdelivr.net/npm/simple-icons/icons/microsoftpowerpoint.svg",
     txt: "https://uxwing.com/wp-content/themes/uxwing/download/file-and-folder-type/txt-file-icon.png",
     default: "https://cdn.jsdelivr.net/npm/simple-icons/icons/file.svg",
 };
