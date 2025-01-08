@@ -73,6 +73,12 @@ Route::post('/email/verification-notification', function (Request $request) {
     Route::get('/api/courses', function () {
         return Course::select('course_id', 'course')->get();
     });
+    
+    Route::get('/api/user/role', function () {
+        return response()->json([
+            'isAdmin' => Auth::user() && Auth::user()->is_admin, // Adjust the `is_admin` field based on your DB schema
+        ]);
+    });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Profile route
