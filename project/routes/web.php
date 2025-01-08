@@ -8,6 +8,8 @@ use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\MentorApplicationController;
 use App\Http\Controllers\PointsController;
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\QuestionLikeController;
 use App\Http\Controllers\ResourcesController;
 use App\Http\Controllers\TestEmailController;
 use App\Http\Controllers\TestMentorRequestController;
@@ -19,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Models\Course;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/test-email', [TestEmailController::class, 'sendVerificationEmail']);
@@ -69,16 +72,16 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-    // routes to get all the courses mainly for the navbar
-    Route::get('/api/courses', function () {
-        return Course::select('course_id', 'course')->get();
-    });
-    
-    Route::get('/api/user/role', function () {
-        return response()->json([
-            'isAdmin' => Auth::user() && Auth::user()->is_admin, // Adjust the `is_admin` field based on your DB schema
-        ]);
-    });
+// routes to get all the courses mainly for the navbar
+Route::get('/api/courses', function () {
+    return Course::select('course_id', 'course')->get();
+});
+
+Route::get('/api/user/role', function () {
+    return response()->json([
+        'isAdmin' => Auth::user() && Auth::user()->is_admin, // Adjust the `is_admin` field based on your DB schema
+    ]);
+});
 
 Route::middleware(['auth', 'verified'])->group(function () {
     // Profile route
@@ -118,8 +121,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/resources/upload/file', [ResourcesController::class, 'getUploadResources'])->name('uploadresources.get');
     Route::post('/resources/add', [ResourcesController::class, 'store'])->name('resources.add');
     Route::get('/resources/download/{filePath}', [ResourcesController::class, 'downloadFile'])
-    ->where('filePath', '.*') // Allow paths with slashes
-    ->name('resources.download');
+        ->where('filePath', '.*') // Allow paths with slashes
+        ->name('resources.download');
 
 
     Route::put('/resources/post/{id}', [ResourcesController::class, 'updateResourcesPost'])->name('resources.post.update');
@@ -128,10 +131,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Points route
     Route::get('/points', [PointsController::class, 'getPoints'])->name('points.get');
 
-    // Mentor applications
-    Route::post('/mentor-applications', [MentorApplicationController::class, 'storeMentorApplication']);
-    Route::get('/mentor-applications', [MentorApplicationController::class, 'index']);
-    Route::put('/mentor-applications/{application}', [MentorApplicationController::class, 'update']);
+
+    Route::post('/api/questions/{question}/like', [QuestionLikeController::class, 'toggle'])
+        ->name('questions.like');
+    Route::post('/questions/{question}/like', [QuestionController::class, 'toggleLike'])->middleware('auth');
 
     // Forum questions route
     Route::get('/forum/ask-question', [ForumController::class, 'createQuestion'])->name('question.create');
@@ -142,12 +145,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 // Admin - GET routes (Requires login and admin access)
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-    Route::get('/admin/users', [AdminController::class, 'getUsers']);
-    Route::get('/admin/reports', [AdminController::class, 'getReports']);
-    Route::get('/admin/posts', [AdminController::class, 'getPosts']);
+    Route::get('/admin', [AdminController::class, 'getMenu']);
+    Route::get('/admin/users', [AdminController::class, 'getUsers'])->name('admin.users.get');
+    Route::get('/admin/reports', [AdminController::class, 'getReports'])->name('admin.reports.get');
+    Route::get('/admin/posts', [AdminController::class, 'getPosts'])->name('admin.users.get');
     Route::get('/admin/comments', [AdminController::class, 'getComments']);
 
-    Route::get('/admin/applications', [AdminController::class, 'getApplications']);
+    Route::get('/admin/applications', [AdminController::class, 'getApplications'])->name('admin.mentor.request.get');
     Route::get('/admin/api-applications', [AdminController::class, 'getApplicationsAPI']);
     Route::get('/admin/testmentorrequest/{id}', [AdminController::class, 'showApplications']);
     Route::delete('/admin/delete-applications/{id}', [AdminController::class, 'deleteApplications']);
