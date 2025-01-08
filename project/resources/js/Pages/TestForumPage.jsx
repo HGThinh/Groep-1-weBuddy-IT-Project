@@ -6,80 +6,94 @@ import Foote from "@/Components/Foote";
 import { useState, useEffect } from "react";
 
 export default function Welcome({ auth, questions: initialQuestions = [] }) {
+    // Add this console.log right after receiving the props
+    console.log('Initial Questions Data:', initialQuestions);
+
     const [questions, setQuestions] = useState(initialQuestions);
+
+    // Add another console.log to verify the state is set correctly
+    useEffect(() => {
+        console.log('Questions in State:', questions);
+    }, [questions]);
+
     const [filteredQuestions, setFilteredQuestions] = useState(initialQuestions);
-    const [value, setValue] = useState(0);
     const [filters, setFilters] = useState({
+        course: {
+            programmingEssentials: false,
+            networkEssentials: false,
+            itEssentials: false,
+            desktopOS: false,
+            webEssentials: false,
+            studyLife: false
+        },
         type: {
-            tutor: false,
-            student: false
+            discussion: false,
+            explanation: false,
+            studyResources: false,
+            review: false
         },
-        language: {
-            dutch: false,
-            english: false,
-            french: false
+        period: {
+            today: false,
+            lastWeek: false,
+            lastMonth: false,
+            lastSemester: false,
+            lastYear: false
         },
-        location: '',
-        maxRate: 0
+        status: {
+            answered: false,
+            inProgress: false,
+            noAnswers: false
+        },
+        verified: {
+            verified: false,
+            unverified: false
+        }
     });
-
-    const handleFilterChange = (category, value) => {
+    const handleFilterChange = (category, item) => {
         setFilters(prev => ({
             ...prev,
-            [category]: value
-        }));
-    };
-
-    const handleTypeChange = (type) => {
-        setFilters(prev => ({
-            ...prev,
-            type: {
-                ...prev.type,
-                [type]: !prev.type[type]
-            }
-        }));
-    };
-
-    const handleLanguageChange = (language) => {
-        setFilters(prev => ({
-            ...prev,
-            language: {
-                ...prev.language,
-                [language]: !prev.language[language]
+            [category]: {
+                ...prev[category],
+                [item]: !prev[category][item]
             }
         }));
     };
 
     useEffect(() => {
-        // Filter questions based on filters
         const applyFilters = () => {
             const filtered = questions.filter((question) => {
-                // Filter by type
-                const typeFilter = Object.entries(filters.type).some(
-                    ([key, value]) => value && question.type === key
-                );
+                // Helper function to check if any filter in a category is selected
+                const isAnyFilterSelected = (filterCategory) =>
+                    Object.values(filters[filterCategory]).some(value => value);
 
-                // Filter by language
-                const languageFilter = Object.entries(filters.language).some(
-                    ([key, value]) => value && question.language === key
-                );
+                // Helper function to check if question matches selected filters in a category
+                const matchesFilter = (filterCategory, questionProperty) => {
+                    return !isAnyFilterSelected(filterCategory) ||
+                        Object.entries(filters[filterCategory])
+                            .some(([key, value]) => value && questionProperty === key);
+                };
 
-                // Filter by location
-                const locationFilter = filters.location
-                    ? question.location === filters.location
-                    : true;
+                // Course filter
+                const courseMatches = matchesFilter('course', question.course);
 
-                // Filter by max rate
-                const rateFilter =
-                    filters.maxRate > 0 ? question.rate <= filters.maxRate : true;
+                // Type filter
+                const typeMatches = matchesFilter('type', question.type);
 
-                // Combine all filters
-                return (
-                    (typeFilter || !Object.values(filters.type).includes(true)) &&
-                    (languageFilter || !Object.values(filters.language).includes(true)) &&
-                    locationFilter &&
-                    rateFilter
-                );
+                // Period filter
+                const periodMatches = matchesFilter('period', question.period);
+
+                // Status filter
+                const statusMatches = matchesFilter('status', question.status);
+
+                // Verified filter
+                const verifiedMatches = matchesFilter('verified', question.verified);
+
+                // All conditions must be true for the question to be included
+                return courseMatches &&
+                       typeMatches &&
+                       periodMatches &&
+                       statusMatches &&
+                       verifiedMatches;
             });
 
             setFilteredQuestions(filtered);
@@ -100,79 +114,109 @@ export default function Welcome({ auth, questions: initialQuestions = [] }) {
 
                     <h3 className={styles.sectionTitle}>Filter by</h3>
 
+                    {/* Course Filter */}
+                    <h4 className={styles.filterTitle}>Course</h4>
+                    <div className={styles.filterGroup}>
+                        {[
+                            ['programmingEssentials', 'Programming Essentials I'],
+                            ['networkEssentials', 'Network Essentials'],
+                            ['itEssentials', 'IT Essentials'],
+                            ['desktopOS', 'Desktop OS'],
+                            ['webEssentials', 'Web Essentials'],
+                            ['studyLife', 'Study Life']
+                        ].map(([value, label]) => (
+                            <label key={value} className={styles.checkboxLabel}>
+                                <input
+                                    type="checkbox"
+                                    className={styles.checkbox}
+                                    checked={filters.course[value]}
+                                    onChange={() => handleFilterChange('course', value)}
+                                />
+                                <span className={styles.labelText}>{label}</span>
+                            </label>
+                        ))}
+                    </div>
+
                     {/* Type Filter */}
                     <h4 className={styles.filterTitle}>Type</h4>
                     <div className={styles.filterGroup}>
-                        <label className={styles.checkboxLabel}>
-                            <input
-                                type="checkbox"
-                                className={styles.checkbox}
-                                checked={filters.type.tutor}
-                                onChange={() => handleTypeChange('tutor')}
-                            />
-                            <span className={styles.labelText}>Tutor</span>
-                        </label>
-                        <label className={styles.checkboxLabel}>
-                            <input
-                                type="checkbox"
-                                className={styles.checkbox}
-                                checked={filters.type.student}
-                                onChange={() => handleTypeChange('student')}
-                            />
-                            <span className={styles.labelText}>Student</span>
-                        </label>
+                        {[
+                            ['discussion', 'Discussion'],
+                            ['explanation', 'Explanation'],
+                            ['studyResources', 'Study Resources'],
+                            ['review', 'Review']
+                        ].map(([value, label]) => (
+                            <label key={value} className={styles.checkboxLabel}>
+                                <input
+                                    type="checkbox"
+                                    className={styles.checkbox}
+                                    checked={filters.type[value]}
+                                    onChange={() => handleFilterChange('type', value)}
+                                />
+                                <span className={styles.labelText}>{label}</span>
+                            </label>
+                        ))}
                     </div>
 
-                    {/* Language Filter */}
-                    <h4 className={styles.filterTitle}>Language</h4>
+                    {/* Period Filter */}
+                    <h4 className={styles.filterTitle}>Period</h4>
                     <div className={styles.filterGroup}>
-                        <label className={styles.checkboxLabel}>
-                            <input
-                                type="checkbox"
-                                className={styles.checkbox}
-                                checked={filters.language.dutch}
-                                onChange={() => handleLanguageChange('dutch')}
-                            />
-                            <span className={styles.labelText}>Dutch</span>
-                        </label>
-                        <label className={styles.checkboxLabel}>
-                            <input
-                                type="checkbox"
-                                className={styles.checkbox}
-                                checked={filters.language.english}
-                                onChange={() => handleLanguageChange('english')}
-                            />
-                            <span className={styles.labelText}>English</span>
-                        </label>
-                        <label className={styles.checkboxLabel}>
-                            <input
-                                type="checkbox"
-                                className={styles.checkbox}
-                                checked={filters.language.french}
-                                onChange={() => handleLanguageChange('french')}
-                            />
-                            <span className={styles.labelText}>French</span>
-                        </label>
+                        {[
+                            ['today', 'Today'],
+                            ['lastWeek', 'Last Week'],
+                            ['lastMonth', 'Last Month'],
+                            ['lastSemester', 'Last Semester'],
+                            ['lastYear', 'Last Year']
+                        ].map(([value, label]) => (
+                            <label key={value} className={styles.checkboxLabel}>
+                                <input
+                                    type="checkbox"
+                                    className={styles.checkbox}
+                                    checked={filters.period[value]}
+                                    onChange={() => handleFilterChange('period', value)}
+                                />
+                                <span className={styles.labelText}>{label}</span>
+                            </label>
+                        ))}
                     </div>
 
-                    {/* Rate Filter */}
-                    <h4 className={styles.filterTitle}>Max Rate Per Hour</h4>
+                    {/* Status Filter */}
+                    <h4 className={styles.filterTitle}>Status</h4>
                     <div className={styles.filterGroup}>
-                        <div className={styles.rangeContainer}>
-                            <span className={styles.rangeLabel}>€0</span>
-                            <input
-                                type="range"
-                                min="0"
-                                max="15"
-                                value={value}
-                                onChange={(e) => {
-                                    setValue(e.target.value);
-                                    handleFilterChange('maxRate', e.target.value);
-                                }}
-                                className={styles.rangeInput}
-                            />
-                            <span className={styles.rangeLabel}>€{value}</span>
-                        </div>
+                        {[
+                            ['answered', 'Answered'],
+                            ['inProgress', 'In Progress'],
+                            ['noAnswers', 'No Answers']
+                        ].map(([value, label]) => (
+                            <label key={value} className={styles.checkboxLabel}>
+                                <input
+                                    type="checkbox"
+                                    className={styles.checkbox}
+                                    checked={filters.status[value]}
+                                    onChange={() => handleFilterChange('status', value)}
+                                />
+                                <span className={styles.labelText}>{label}</span>
+                            </label>
+                        ))}
+                    </div>
+
+                    {/* Verified Filter */}
+                    <h4 className={styles.filterTitle}>Verified</h4>
+                    <div className={styles.filterGroup}>
+                        {[
+                            ['verified', 'Verified'],
+                            ['unverified', 'Unverified']
+                        ].map(([value, label]) => (
+                            <label key={value} className={styles.checkboxLabel}>
+                                <input
+                                    type="checkbox"
+                                    className={styles.checkbox}
+                                    checked={filters.verified[value]}
+                                    onChange={() => handleFilterChange('verified', value)}
+                                />
+                                <span className={styles.labelText}>{label}</span>
+                            </label>
+                        ))}
                     </div>
                 </div>
 

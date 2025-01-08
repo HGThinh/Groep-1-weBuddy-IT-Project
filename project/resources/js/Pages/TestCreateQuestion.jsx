@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+import Navbar from "@/Components/Navbar";
+import Foote from "@/Components/Foote";
 
 export default function CreateQuestion() {
     const [formData, setFormData] = useState({
@@ -28,7 +30,7 @@ export default function CreateQuestion() {
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            const response = await fetch('/questions', {
+            const response = await fetch('/forum/store-question', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -77,6 +79,8 @@ export default function CreateQuestion() {
     };
 
     return (
+        <>
+        <Navbar items={courses} />
         <div className="max-w-2xl mx-auto p-4 mt-8">
             <h1 className="text-2xl font-bold mb-6">Ask a Question</h1>
 
@@ -174,5 +178,7 @@ export default function CreateQuestion() {
                 </div>
             </form>
         </div>
+        <Foote />
+        </>
     );
 }
