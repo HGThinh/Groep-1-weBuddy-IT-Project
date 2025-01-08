@@ -1,6 +1,3 @@
-// import React from "react";
-// import styles from "./Mentor.module.css";
-
 // const Mentor = ({
 //     name,
 //     points,
@@ -76,22 +73,47 @@
 // };
 
 // export default Mentor;
+import React from "react";
+import styles from "./Mentor.module.css";
 
-export default function Mentor({ name, points, role, tags, description, bio }) {
+export default function Mentor({
+    name,
+    points,
+    role,
+    tags = [],
+    languages = [],
+    bio,
+}) {
     return (
         <div className={styles.mentorCard}>
-            <h3>{name}</h3>
-            <div className={styles.points}>Points: {points}</div>
-            <div className={styles.role}>{role}</div>
-            <div className={styles.tags}>
-                {tags.map((tag, index) => (
-                    <span key={index} className={styles.tag}>
-                        {tag}
-                    </span>
-                ))}
+            <div>
+                <h2>
+                    {name} | {points} points
+                </h2>
+                <p>Contact : </p>
+                <ul className={styles.tags}>
+                    <li className={styles.role}>{role}</li>
+                    {tags.map((tag, index) => (
+                        <li className={styles.tag} key={index}>
+                            {tag}
+                        </li>
+                    ))}
+                </ul>
+                {/* Languages */}
+                <h4>Languages:</h4>
+                <div className={styles.languages}>
+                    {Array.isArray(languages) ? (
+                        languages.map((language, index) => (
+                            <span key={index} className={styles.language}>
+                                {language}
+                            </span>
+                        ))
+                    ) : (
+                        <span>No languages available</span>
+                    )}
+                </div>
+                Bio: {bio && <p className={styles.bio}>{bio}</p>}
             </div>
-            <p className={styles.description}>{description}</p>
-            {bio && <p className={styles.bio}>{bio}</p>}
         </div>
     );
 }

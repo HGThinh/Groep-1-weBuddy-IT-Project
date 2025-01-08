@@ -202,7 +202,6 @@
 //     );
 // }
 
-
 //////////
 import { Head, Link } from "@inertiajs/react";
 import Navbar from "@/Components/Navbar";
@@ -217,15 +216,17 @@ export default function Welcome({ mentors }) {
         type: {
             tutor: false,
             student: false,
+            buddy: false,
         },
         language: {
             dutch: false,
             english: false,
             french: false,
         },
-        location: '',
+        location: "",
     });
     const [filteredMentors, setFilteredMentors] = useState(mentors);
+    console.log(mentors);
 
     const courses = [
         "Programming Essentials 1",
@@ -238,17 +239,17 @@ export default function Welcome({ mentors }) {
         "Data Essentials",
         "Desktop OS",
         "Italent 1",
-        "Software Design essentials"
+        "Software Design essentials",
     ];
 
     const handleFilterChange = (category, key) => {
-        if (category === 'location') {
-            setFilters(prev => ({
+        if (category === "location") {
+            setFilters((prev) => ({
                 ...prev,
                 location: key,
             }));
         } else {
-            setFilters(prev => ({
+            setFilters((prev) => ({
                 ...prev,
                 [category]: {
                     ...prev[category],
@@ -259,23 +260,29 @@ export default function Welcome({ mentors }) {
     };
 
     useEffect(() => {
-        const filtered = mentors.filter(mentor => {
+        const filtered = mentors.filter((mentor) => {
             // Type filter
-            if (filters.type.tutor && mentor.role !== 'Tutor') return false;
-            if (filters.type.student && mentor.role !== 'Student') return false;
+            if (filters.type.tutor && mentor.role !== "Tutor") return false;
+            if (filters.type.student && mentor.role !== "Student") return false;
+            if (filters.type.buddy && mentor.role !== "Buddy") return false;
 
             // Language filter
             const selectedLanguages = Object.entries(filters.language)
                 .filter(([_, selected]) => selected)
                 .map(([lang]) => lang.charAt(0).toUpperCase() + lang.slice(1));
 
-            if (selectedLanguages.length > 0 &&
-                !selectedLanguages.some(lang => mentor.languages.includes(lang))) {
+            if (
+                selectedLanguages.length > 0 &&
+                !selectedLanguages.some((lang) =>
+                    mentor.languages.includes(lang)
+                )
+            ) {
                 return false;
             }
 
             // Location filter
-            if (filters.location && mentor.location !== filters.location) return false;
+            if (filters.location && mentor.location !== filters.location)
+                return false;
 
             return true;
         });
@@ -303,7 +310,9 @@ export default function Welcome({ mentors }) {
                                 type="checkbox"
                                 className={styles.checkbox}
                                 checked={filters.type.tutor}
-                                onChange={() => handleFilterChange('type', 'tutor')}
+                                onChange={() =>
+                                    handleFilterChange("type", "tutor")
+                                }
                             />
                             <span className={styles.labelText}>Tutor</span>
                         </label>
@@ -312,9 +321,22 @@ export default function Welcome({ mentors }) {
                                 type="checkbox"
                                 className={styles.checkbox}
                                 checked={filters.type.student}
-                                onChange={() => handleFilterChange('type', 'student')}
+                                onChange={() =>
+                                    handleFilterChange("type", "student")
+                                }
                             />
                             <span className={styles.labelText}>Student</span>
+                        </label>
+                        <label className={styles.checkboxLabel}>
+                            <input
+                                type="checkbox"
+                                className={styles.checkbox}
+                                checked={filters.type.buddy}
+                                onChange={() =>
+                                    handleFilterChange("type", "buddy")
+                                }
+                            />
+                            <span className={styles.labelText}>buddy</span>
                         </label>
                     </div>
 
@@ -322,18 +344,22 @@ export default function Welcome({ mentors }) {
                     <h4 className={styles.filterTitle}>Language</h4>
                     <div className={styles.filterGroup}>
                         {Object.entries({
-                            dutch: 'Dutch',
-                            english: 'English',
-                            french: 'French'
+                            dutch: "Dutch",
+                            english: "English",
+                            french: "French",
                         }).map(([key, label]) => (
                             <label key={key} className={styles.checkboxLabel}>
                                 <input
                                     type="checkbox"
                                     className={styles.checkbox}
                                     checked={filters.language[key]}
-                                    onChange={() => handleFilterChange('language', key)}
+                                    onChange={() =>
+                                        handleFilterChange("language", key)
+                                    }
                                 />
-                                <span className={styles.labelText}>{label}</span>
+                                <span className={styles.labelText}>
+                                    {label}
+                                </span>
                             </label>
                         ))}
                     </div>
@@ -341,30 +367,48 @@ export default function Welcome({ mentors }) {
                     {/* Location filters */}
                     <h4 className={styles.filterTitle}>Location</h4>
                     <div className={styles.filterGroup}>
-                        {['Live', 'Online', 'Both'].map(location => (
+                        {["Live", "Online", "Both"].map((location) => (
                             <label key={location} className={styles.radioLabel}>
                                 <input
                                     type="radio"
                                     name="location"
                                     className={styles.radio}
                                     checked={filters.location === location}
-                                    onChange={() => handleFilterChange('location', location)}
+                                    onChange={() =>
+                                        handleFilterChange("location", location)
+                                    }
                                 />
-                                <span className={styles.labelText}>{location}</span>
+                                <span className={styles.labelText}>
+                                    {location}
+                                </span>
                             </label>
                         ))}
                     </div>
                 </div>
 
                 <div className={styles.mentorGrid}>
-                    {filteredMentors.map(mentor => (
+                    {filteredMentors.map((mentor) => (
                         <Mentor
                             key={mentor.id}
                             name={mentor.name}
                             points={mentor.points}
                             role={mentor.role}
-                            tags={mentor.tags}
-                            description={mentor.description}
+                            tags={
+                                Array.isArray(mentor.tags)
+                                    ? mentor.tags
+                                    : (() => {
+                                          try {
+                                              return JSON.parse(mentor.tags);
+                                          } catch {
+                                              return [];
+                                          }
+                                      })()
+                            }
+                            languages={
+                                mentor.languages
+                                    ? JSON.parse(mentor.languages)
+                                    : []
+                            } // Parse JSON if necessary
                             bio={mentor.bio}
                         />
                     ))}
