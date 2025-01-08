@@ -76,6 +76,8 @@ body {
     z-index: 1;
 }
 
+
+
 .Courses {
     height: 90px;
     flex: 1;
@@ -120,4 +122,10 @@ body {
 /* Hide scrollbar */
 .Courses::-webkit-scrollbar {
     display: none;
+}
+
+.adminPanel {
+    font-style: italic;
+    text-decoration: underline;
+    color: rgb(0, 238, 255);
 }
