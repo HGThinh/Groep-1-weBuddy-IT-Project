@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MentorController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\MentorApplicationController;
+use App\Http\Controllers\MentorRequestController;
 use App\Http\Controllers\PointsController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\QuestionLikeController;
@@ -99,7 +100,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mentor', [MentorController::class, 'getMentor'])->name('mentor.get');
     Route::get('/mentor/info', [MentorController::class, 'getInfo'])->name('mentor.info.get');
     Route::get('/mentor/profile/{id}', [MentorController::class, 'getMentorProfile'])->name('mentor.profile.get');
-    Route::post('/mentor/request', [MentorController::class, 'sendRequest'])->name('mentor.request.post');
+    Route::post('/mentor/become-mentor/request', [MentorRequestController::class, 'store']);
     Route::post('/mentor/application', [MentorController::class, 'sendApplication'])->name('mentor.application.post');
     Route::get('/mentor/become-mentor', [MentorController::class, 'createMentorRequest'])->name('mentor.request');
 

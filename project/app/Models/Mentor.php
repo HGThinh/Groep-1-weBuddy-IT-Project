@@ -9,6 +9,7 @@ class Mentor extends Model
 
     protected $fillable = [
         'name',
+        'points',
         'role',
         'tags',
         'description',
@@ -23,4 +24,9 @@ class Mentor extends Model
         'tags' => 'array',
         'languages' => 'array',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

@@ -36,8 +36,16 @@ export default function MentorRequest() {
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            // Log the data being sent
-            console.log('Sending data:', formData);
+            // Validate required fields
+            const requiredFields = ['role', 'courses', 'languages', 'location', 'motivation_letter', 'bio'];
+            const missingFields = requiredFields.filter(field => !formData[field] ||
+                (Array.isArray(formData[field]) && formData[field].length === 0));
+
+            if (missingFields.length > 0) {
+                alert(`Please fill in all required fields: ${missingFields.join(', ')}`);
+                setIsSubmitting(false);
+                return;
+            }
 
             const response = await fetch('/mentor/become-mentor/request', {
                 method: 'POST',
@@ -46,6 +54,7 @@ export default function MentorRequest() {
                     'Accept': 'application/json',
                     'X-CSRF-TOKEN': csrfToken,
                 },
+                credentials: 'same-origin',
                 body: JSON.stringify(formData),
             });
 
@@ -69,18 +78,16 @@ export default function MentorRequest() {
                 });
                 setErrors({});
             } else {
-                console.error('Submission error:', data);
                 setErrors(data.errors || {});
-                alert('Error submitting form. Please check all fields.');
+                alert(data.message || 'Error submitting form. Please check all fields.');
             }
         } catch (error) {
             console.error('Error submitting mentor request:', error);
-            alert('Error submitting form. Please try again.');
+            alert('Error submitting form. Please try again later.');
         } finally {
             setIsSubmitting(false);
         }
     };
-
     const handleCheckboxChange = (field, value) => {
         setFormData(prev => ({
             ...prev,

@@ -32,9 +32,7 @@ class AdminController extends Controller
     {
         $applications = MentorRequest::all(); // Fetch mentor applications
 
-        // return Inertia::render('AdminMentorApplications', [
-        //     'applications' => $applications, // Pass applications data to the React component
-        // ]);
+
         return Inertia::render('AdminMentorApplications', [
             'applications' => $applications, // Pass applications data to the React component
         ]);
@@ -62,7 +60,7 @@ class AdminController extends Controller
     public function showApplications($id)
     {
         try {
-            $application = TestMentorRequest::findOrFail($id);
+            $application = MentorRequest::findOrFail($id);
             return response()->json($application, 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Application not found.', 'error' => $e->getMessage()], 404);
