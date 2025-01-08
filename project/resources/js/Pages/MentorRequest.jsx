@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Navbar from "@/Components/Navbar";
+import Foote from "@/Components/Foote";
 
 export default function MentorRequest() {
     const [formData, setFormData] = useState({
@@ -17,6 +19,16 @@ export default function MentorRequest() {
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    const courses = [
+        "Programming Essentials",
+        "Advanced React",
+        "Web Development Basics",
+        "Programming Essentials 2",
+        "IT Essentials",
+        "Desktop OS",
+        "Network essentials",
+    ];
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
@@ -24,7 +36,10 @@ export default function MentorRequest() {
         try {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            const response = await fetch('/api/testmentorrequest', {
+            // Log the data being sent
+            console.log('Sending data:', formData);
+
+            const response = await fetch('/mentor/become-mentor/request', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,8 +49,11 @@ export default function MentorRequest() {
                 body: JSON.stringify(formData),
             });
 
+            const data = await response.json();
+
             if (response.ok) {
                 alert('Request submitted successfully!');
+                // Reset form
                 setFormData({
                     role: '',
                     courses: [],
@@ -49,12 +67,15 @@ export default function MentorRequest() {
                     keyword2: '',
                     keyword3: ''
                 });
+                setErrors({});
             } else {
-                const data = await response.json();
+                console.error('Submission error:', data);
                 setErrors(data.errors || {});
+                alert('Error submitting form. Please check all fields.');
             }
         } catch (error) {
             console.error('Error submitting mentor request:', error);
+            alert('Error submitting form. Please try again.');
         } finally {
             setIsSubmitting(false);
         }
@@ -74,6 +95,8 @@ export default function MentorRequest() {
     };
 
     return (
+        <>
+        <Navbar items={courses} />
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto p-4 mt-8 space-y-6">
             <h1 className="text-2xl font-bold">Mentor Request Form</h1>
 
@@ -236,5 +259,7 @@ export default function MentorRequest() {
                 </button>
             </div>
         </form>
+        <Foote />
+        </>
     );
 }

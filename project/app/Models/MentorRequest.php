@@ -6,25 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class MentorRequest extends Model
 {
-    protected $table="mentor_requests";
-    protected $primaryKey="mentor_request_id";
 
     protected $fillable = [
-     'request', 'student_id', 'mentor_id'
+        'user_id',
+        'role',
+        'courses',
+        'rate',
+        'languages',
+        'location',
+        'motivation_letter',
+        'grades_or_resume',
+        'bio',
+        'keyword1',
+        'keyword2',
+        'keyword3',
     ];
 
-    //relations
-
-    public function student(){
-        return $this->belongsTo(Student::class);
+    protected $casts = [
+        'courses' => 'array',
+        'languages' => 'array',
+    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
-
-    public function course(){
-        return $this->belongsToMany(Course::class);
-    }
-
-    public function mentor(){
-        return $this->belongsTo(Mentor::class);
-    }
-
 }

@@ -1,5 +1,7 @@
 import { Head, Link } from "@inertiajs/react";
 import Navbar from "@/Components/Navbar";
+import Foote from "@/Components/Foote";
+import axios from "axios";
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     //route
@@ -27,28 +29,87 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         "Desktop OS",
     ];
 
+    // Define styles
+    // const containerStyle = {
+    //     minHeight: '100vh',
+    //     backgroundColor: '#f3f4f6',
+    //     padding: '20px'
+    // };
+
+    const headerStyle = {
+        padding: '15px',
+    };
+
+
+    const loginButtonStyle = {
+        backgroundColor: '#3b82f6',
+        color: 'white',
+        padding: '8px 16px',
+        borderRadius: '6px',
+        textDecoration: 'none',
+        marginRight: '10px',
+        transition: 'background-color 0.3s ease',
+        cursor: 'pointer'
+    };
+
+    const registerButtonStyle = {
+        backgroundColor: '#22c55e',
+        color: 'white',
+        padding: '8px 16px',
+        borderRadius: '6px',
+        textDecoration: 'none',
+        transition: 'background-color 0.3s ease',
+        cursor: 'pointer'
+    };
+
+
     return (
         <>
             <Navbar items={courses} />
             <Head title="Welcome" />
-            <div>
+            <div >
                 <div>
                     <div>
-                        <header>
-                            <nav>
-                                {auth.user ? ( //ternary operator
+                        <header style={headerStyle}>
+                            <nav >
+                                {auth.user ? (
                                     <Link
                                         href={route("dashboard")}
-                                        className="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                        style={{
+                                            padding: '8px 16px',
+                                            borderRadius: '6px',
+                                            textDecoration: 'none',
+                                            color: 'black',
+                                            border: '1px solid transparent',
+                                            transition: 'all 0.3s ease'
+                                        }}
                                     >
                                         Dashboard
                                     </Link>
                                 ) : (
                                     <>
-                                        <Link href={route("login")}>
+                                        <Link
+                                            href={route("login")}
+                                            style={loginButtonStyle}
+                                            onMouseOver={(e) => {
+                                                e.target.style.backgroundColor = '#2563eb'
+                                            }}
+                                            onMouseOut={(e) => {
+                                                e.target.style.backgroundColor = '#3b82f6'
+                                            }}
+                                        >
                                             Log in
                                         </Link>
-                                        <Link href={route("register")}>
+                                        <Link
+                                            href={route("register")}
+                                            style={registerButtonStyle}
+                                            onMouseOver={(e) => {
+                                                e.target.style.backgroundColor = '#16a34a'
+                                            }}
+                                            onMouseOut={(e) => {
+                                                e.target.style.backgroundColor = '#22c55e'
+                                            }}
+                                        >
                                             Register
                                         </Link>
                                     </>
@@ -56,11 +117,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                             </nav>
                         </header>
 
-                        <main></main>
+                        <main style={{ minHeight: '400px' }}>
+                            {/* Your main content here */}
+                        </main>
 
-                        <footer>
-                            Laravel v{laravelVersion} (PHP v{phpVersion})
-                        </footer>
+                        <Foote/>
                     </div>
                 </div>
             </div>
